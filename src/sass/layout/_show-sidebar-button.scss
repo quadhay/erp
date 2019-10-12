@@ -1,0 +1,9 @@
+#show-sidebar {
+    position: fixed;
+    left: 0;
+    top: 10px;
+    border-radius: 0 4px 4px 0px;
+    width: 35px;
+    transition-delay: $duration;
+    transition: left .5s ease;
+}

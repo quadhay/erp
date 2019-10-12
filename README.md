@@ -1,2 +1,2 @@
-# zubitex
-Zubitex Inventory
+# erp
+Enterprise Inventory

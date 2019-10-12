@@ -1,0 +1,218 @@
+@import './variables'; 
+
+.app-login {
+
+    height: 100vh;
+
+    .app-login-container {
+
+        max-width: 400px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        color: #ffffff;
+
+        a, input { color: #ffffff; }
+
+        .app-login-title {
+            img { max-width: 70px; }
+
+            label {
+                font-size: 30px;
+             }        
+        }
+
+        @media only screen and (max-width: 600px), screen and (max-height: 610px)  {
+            padding: 0px;
+        }
+        
+        @media only screen and (max-height: 400px)  {
+            position: static;
+            transform: none;  
+            padding: 0;
+        }
+
+        .app-login-content {
+
+            @media only screen and (max-width: 600px), screen and (max-height: 610px)  {
+                background: none; 
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none; 
+                 box-shadow:none; 
+            }
+
+            .app-login-body {
+                padding: 30px 30px;
+    
+                input.form-control {
+    
+                    height: 50px;
+                    border-radius: 0;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    border: none;
+                    font-size: 16px;
+                    -o-transition:all .5s;
+                    -webkit-transition:all .5s;
+                    transition:all .5s;
+    
+                    & + i {
+                        position: absolute;
+                        right: 15px;
+                        top: 11px;
+                        font-size: 18px;
+                        -o-transition:all .5s;
+                        -webkit-transition:all .5s;
+                        transition:all .5s;
+                    }
+    
+                }
+            
+                button {
+                    width: 100%;
+                    height: 50px;
+                    -moz-border-radius: 0px;
+                    -webkit-border-radius: 0px;
+                    border-radius: 0px;
+                    font-size: 20px;
+                }
+    
+                @media only screen and (max-width: 600px), screen and (max-height: 610px)  {
+                    padding: 10px 10px;
+                }
+            }
+
+        }
+    
+        .app-login-footer {
+            padding: 20px 0;
+
+            @media only screen and (max-width: 600px), screen and (max-height: 610px)  {
+                padding: 0;
+            }
+        }
+
+    }
+
+}
+
+.theme1 {
+
+    background: #132533;
+
+    .app-login-container {
+
+        .app-login-title {
+            text-shadow: -1px 1px 1px rgb(17, 42, 51);
+            label { color: #4bccff; }        
+        }
+
+        .app-login-content {
+
+            background: rgba(0, 0, 0, 0.4);
+       
+            .app-login-body {
+
+                input.form-control {
+                    background: rgba(0, 0, 0, 0.7);
+                    border-left: 3px solid transparent;
+    
+                    & + i { color: rgb(24, 80, 103); }
+    
+                    &:focus {
+                        border-color: #4bccff;
+                        & + i { color: #4bccff; }
+                    }                
+                }    
+                
+                button {
+                    color: #fff;
+                    background-color: #3490dc;
+                    border-color: #3490dc;
+                
+                    &:hover {
+                        background-color: #227dc7;
+                        border-color: #2176bd;
+                    }
+                }
+
+            }
+
+        }
+
+        .credit a { color: #4bccff; }
+    
+    }
+
+}
+
+.theme2 {
+
+    background: #a07349;
+
+    .app-login-container {
+
+        .app-login-title {
+            text-shadow: -1px 1px 1px rgba(108, 83, 54, 0.3);
+            label { color: #f0ad4e; }        
+        }
+
+        .app-login-content {
+            
+            background: rgba(0, 0, 0, 0.47);
+            -moz-box-shadow: -1px 1px 4px rgba(88, 51, 33, 0.8);
+            -webkit-box-shadow: -1px 1px 4px rgba(88, 51, 33, 0.8);
+            box-shadow: -1px 1px 4px rgba(88, 51, 33, 0.8);    
+            
+            .app-login-body {
+
+                input.form-control {
+                    background: rgba(0, 0, 0, 0.51);
+                    border-bottom: 2px solid transparent;
+    
+                    & + i { color: rgba(240, 173, 78, 0.3); }
+    
+                    & ~ span {
+                        position: absolute;
+                        bottom: 0;
+                        display: inline-block;
+                        height: 2px;
+                        width: 0;
+                        background: #f0ad4e;
+                        -o-transition: width $duration ease;
+                        -webkit-transition: width $duration ease;
+                        transition: width $duration ease;
+                        left: 50%;
+                        -webkit-transform: translateX(-50%);
+                        -ms-transform: translateX(-50%);
+                        transform: translateX(-50%);
+                    }
+    
+                    &:focus {
+                        & + i { color: #f0ad4e; }
+                        & ~ span { width: 100%; }
+                    }                
+                }  
+                
+                button {
+                    color: #212529;
+                    background-color: #ffed4a;
+                    border-color: #ffed4a;
+                    
+                    &:hover {
+                        background-color: #ffe924;
+                        border-color: #ffe817;
+                    }
+                }
+
+            }
+
+        }
+
+        .credit a { color: #f0ad4e; }
+    
+    }
+
+}

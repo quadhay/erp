@@ -8,21 +8,21 @@ export const sidebar = [
 
     {
         id: 2,
-        path: '/sales-orders',
+        path: '/sales_orders',
         icon: 'calendar',
         label: 'Orders'
     },
 
     {
         id: 3,
-        path: '/sales-invoices',
+        path: '/sales_invoices',
         icon: 'calendar',
         label: 'Invoices'
     },
 
     {
         id: 4,
-        path: '/sales-returns',
+        path: '/sales_returns',
         icon: 'calendar',
         label: 'Returns'
     },
@@ -35,21 +35,21 @@ export const sidebar = [
     },
         {
         id: 6,
-        path: '/purchase-orders',
+        path: '/purchase_orders',
         icon: 'calendar',
         label: 'Orders'
     },
 
     {
         id: 7,
-        path: '/purchase-invoices',
+        path: '/purchase_invoices',
         icon: 'calendar',
         label: 'Invoices'
     },
 
     {
         id: 8,
-        path: '/purchase-returns',
+        path: '/purchase_returns',
         icon: 'calendar',
         label: 'Returns'
     },

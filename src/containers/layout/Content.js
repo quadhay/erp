@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { UI_Actions } from '../../actions'
 import Content from '../../components/layout/Content'
 
-const mapStateToProps = state => ({ fontSize: state.UI.fontSize })
+const mapStateToProps = state => ({ fontSize: state.UI.fontSize, contentBox: state.UI.contentBox })
 
 const mapDispatchToProps = dispatch => ({ hideSidebar: () => dispatch(UI_Actions.toggleSidebar()) })
 

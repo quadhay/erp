@@ -17,8 +17,7 @@ $bg-color) {
 
     .main-header {
 
-        background-color: $sidebar-bg-color;
-        color: $primary-color;
+        background-color: #343a40;
 
         li, span, i, svg, a, input, button {
             color: $primary-color;
@@ -29,7 +28,7 @@ $bg-color) {
         }
 
         input.search-content, .input-group-text {
-            background-color: $search-input-bg-color;
+            background-color: rgba($color: $search-input-bg-color, $alpha: .5);
             border: none;
             box-shadow: none;
             margin-left: 1px;

@@ -6,7 +6,7 @@ const initialState = {
     sidebar: true,
 	pinSidebar: false,
 	mainHeader: true,
-	rightPanel: true,
+	rightPanel: false,
 	theme: 'default-theme',
 	sidebarBgImg: 'bg1',
 	sidebarBg: true,

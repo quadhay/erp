@@ -1,38 +1,38 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import { NavDropdown, Dropdown, Button, ButtonGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const Header = ({ id, toggleSidebar }) => {
-    /*const {expanded, active} = id
-
-    if ( expanded && active ) {
-        console.log('have children')
-    } else if ( !expanded  )*/
+const Header = ({ toggleSidebar }) => {
 
     return (
-        <nav className="main-header navbar navbar-expand justify-content-between">
-            <ul className="navbar-nav">
+        <nav className="main-header navbar navbar-expand ">
+            <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
                     <span className="nav-link" data-widget="pushmenu" onClick={toggleSidebar}>
                         <FontAwesomeIcon icon="bars" />
                     </span>
                 </li>
 
-                <li className="nav-item d-none d-sm-inline-block">
-                    <Link to="/" className="nav-link">Home</Link>
+                <li className="nav-item d-none d-md-inline-block">
+                    <NavLink to="/purchase_orders" className="nav-link">Purchase</NavLink>
                 </li>
 
-                <li className="nav-item d-none d-sm-inline-block">
-                    <Link to="/about" className="nav-link">About App</Link>
+                <li className="nav-item d-none d-md-inline-block">
+                    <NavLink to="/sales_orders" className="nav-link">Sales</NavLink>
                 </li>
 
-                <li className="nav-item d-none d-sm-inline-block">
-                    <Link to="/logout" className="nav-link">Logout</Link>
-                </li>                
+                <NavDropdown title="Stock" className="d-none d-md-inline-block" id="app-nav-dropdown">
+                    <NavLink to="/stock_receive" className="dropdown-item">Item Receive</NavLink>
+                    <NavLink to="/stock_transfer" className="dropdown-item">Stock Transfer</NavLink>
+                    <NavDropdown.Divider />
+                    <NavLink to="/stock" className="dropdown-item">Current Stock</NavLink>
+                    <NavLink to="/stock_adjustment" className="dropdown-item">Stock Adjustment</NavLink>
+                </NavDropdown>             
             </ul>
 
-            <form className="form-inline">
+            <form className="form-inline mr-3">
                 <div className="input-group input-group-sm">
                     <input type="search" className="form-control search-content" placeholder="Search..."/>
 
@@ -43,13 +43,24 @@ const Header = ({ id, toggleSidebar }) => {
                     </div>
                 </div>
             </form>
+
+            <Dropdown as={ButtonGroup}>
+                <Button variant="secondary"><FontAwesomeIcon icon="user-alt" /> <span className="d-none d-sm-inline-block">quadhay@gmail.com</span></Button>
+
+                <Dropdown.Toggle split variant="secondary" id="app-dropdown-split" />
+
+                <Dropdown.Menu>
+                    <NavLink to="/documentation" className="dropdown-item"><FontAwesomeIcon icon="book" /> Documentation</NavLink>
+                    <NavLink to="/settings" className="dropdown-item"><FontAwesomeIcon icon="cog" /> Settings</NavLink>
+                    <NavLink to="/logout" className="dropdown-item"><FontAwesomeIcon icon="power-off" /> Logout</NavLink>
+                </Dropdown.Menu>
+            </Dropdown>
         </nav>  
     )
 
 }
 
 Header.propTypes = {
-    id: PropTypes.object.isRequired,
     toggleSidebar: PropTypes.func.isRequired,
 }
 

@@ -1,0 +1,38 @@
+{
+  "files": {
+    "static/js/0.77353096.chunk.js": "/erp/static/js/0.77353096.chunk.js",
+    "static/js/0.77353096.chunk.js.map": "/erp/static/js/0.77353096.chunk.js.map",
+    "main.css": "/erp/static/css/main.e7f0feae.chunk.css",
+    "main.js": "/erp/static/js/main.ef54e5c3.chunk.js",
+    "main.js.map": "/erp/static/js/main.ef54e5c3.chunk.js.map",
+    "runtime-main.js": "/erp/static/js/runtime-main.056a8753.js",
+    "runtime-main.js.map": "/erp/static/js/runtime-main.056a8753.js.map",
+    "static/css/3.e6157a56.chunk.css": "/erp/static/css/3.e6157a56.chunk.css",
+    "static/js/3.9484e6a4.chunk.js": "/erp/static/js/3.9484e6a4.chunk.js",
+    "static/js/3.9484e6a4.chunk.js.map": "/erp/static/js/3.9484e6a4.chunk.js.map",
+    "static/js/4.388b0a77.chunk.js": "/erp/static/js/4.388b0a77.chunk.js",
+    "static/js/4.388b0a77.chunk.js.map": "/erp/static/js/4.388b0a77.chunk.js.map",
+    "static/css/5.dff1a273.chunk.css": "/erp/static/css/5.dff1a273.chunk.css",
+    "static/js/5.8ba4bf5c.chunk.js": "/erp/static/js/5.8ba4bf5c.chunk.js",
+    "static/js/5.8ba4bf5c.chunk.js.map": "/erp/static/js/5.8ba4bf5c.chunk.js.map",
+    "static/css/6.5d7e9f48.chunk.css": "/erp/static/css/6.5d7e9f48.chunk.css",
+    "static/js/6.ff2fa6d3.chunk.js": "/erp/static/js/6.ff2fa6d3.chunk.js",
+    "static/js/6.ff2fa6d3.chunk.js.map": "/erp/static/js/6.ff2fa6d3.chunk.js.map",
+    "index.html": "/erp/index.html",
+    "precache-manifest.f73f77f97a4aaaba56df6c36604bafda.js": "/erp/precache-manifest.f73f77f97a4aaaba56df6c36604bafda.js",
+    "service-worker.js": "/erp/service-worker.js",
+    "static/css/3.e6157a56.chunk.css.map": "/erp/static/css/3.e6157a56.chunk.css.map",
+    "static/css/5.dff1a273.chunk.css.map": "/erp/static/css/5.dff1a273.chunk.css.map",
+    "static/css/6.5d7e9f48.chunk.css.map": "/erp/static/css/6.5d7e9f48.chunk.css.map",
+    "static/css/main.e7f0feae.chunk.css.map": "/erp/static/css/main.e7f0feae.chunk.css.map",
+    "static/media/app.scss": "/erp/static/media/bg4.23d3b8d4.jpg",
+    "static/media/guard-logo.png": "/erp/static/media/guard-logo.f6bb0b87.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.056a8753.js",
+    "static/css/3.e6157a56.chunk.css",
+    "static/js/3.9484e6a4.chunk.js",
+    "static/css/main.e7f0feae.chunk.css",
+    "static/js/main.ef54e5c3.chunk.js"
+  ]
+}

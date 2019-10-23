@@ -10,37 +10,37 @@ const routes = [
 
     {
         id: 2,
-        path: "/sales-orders",
+        path: "/sales_orders",
         component: Components.Sales.Orders
     },
 
     {
         id: 3,
-        path: "/sales-invoices",
+        path: "/sales_invoices",
         component: Components.Sales.Invoices
     },
 
     {
         id: 4,
-        path: "/sales-returns",
+        path: "/sales_returns",
         component: Components.Sales.Returns
     },
 
     {
         id: 5,
-        path: "/purchase-orders",
+        path: "/purchase_orders",
         component: Components.Purchase.Orders
     },
 
     {
         id: 6,
-        path: "/purchase-invoices",
+        path: "/purchase_invoices",
         component: Components.Purchase.Invoices
     },
 
     {
         id: 7,
-        path: "/purchase-returns",
+        path: "/purchase_returns",
         component: Components.Purchase.Returns
     },
 
@@ -48,6 +48,12 @@ const routes = [
         id: 8,
         path: "/stock",
         component: 10000
+    },
+
+    {
+        id: 9,
+        path: "/settings",
+        component: Components.Settings
     }
 ]
 

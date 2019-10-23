@@ -1,5 +1,5 @@
 import React from 'react'
 
-const Home = ({ name = "Andre" }) => <h1>Welcome, {name}!</h1>
+const Home = () => <h4>Welcome, Admin!</h4>
 
 export default Home

@@ -8,7 +8,8 @@ const initialState = {
     sidebarMouseEnter: false,
     expandedItem: null,
     expandedItemParent: null,
-    activeItem: null
+    activeItem: null,
+    contentBox: true
 }
 
 const { CHANGE_FONTSIZE, LINK_CLICK, TOGGLE_SUBMENU, TOGGLE_SIDEBAR, SIDEBAR_HOVER, TOGGLE_PIN_SIDEBAR } = UI_Constants

@@ -1,15 +1,41 @@
 import { connect } from 'react-redux'
 import App from '../components/App'
-import { alertActions } from '../actions'
+import { userActions, alertActions } from '../actions'
+import { userService } from '../services'
 
 const mapState = state => ({
-    user: state.auth,
+    auth: state.auth,
     alert: state.alert
 })
 
-// Why is this action working without dispatch which I specified in the others
-const actionCreators = {
-    clearAlert: alertActions.clear
-}
+const actions = dispatch => ({
+	signIn: (email, password, e) => {
+        dispatch(userActions.loginRequest(email))
+        dispatch(alertActions.info(`Authenticating ${String.fromCharCode(8594)} ${email}`))
+        
+        userService
+            .login({ email, password })
+                .then(
+                    response => { 
+                        dispatch(userActions.loginSuccess(response.data))
+                    },
+                    error => {
+                        let msg
+                        if ( error.response ) {
+                            msg = error.response.status !== 500 ? error.response.data : 'Oops, something went wrong'
+                        } else {
+                            msg = error.toString()
+                        }                        
+                        
+                        dispatch(userActions.loginFailure())
+                        dispatch(alertActions.error(msg))
+                    }
+                )
 
-export default connect( mapState, actionCreators )(App)
+		e.preventDefault()
+    },
+
+    clearAlert: () => dispatch(alertActions.clear())
+})
+
+export default connect( mapState, actions )(App)

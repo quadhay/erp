@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { NavDropdown, Dropdown, Button, ButtonGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const Header = ({ toggleSidebar }) => {
+const Header = ({ toggleSidebar, user, signOut }) => {
 
     return (
         <nav className="main-header navbar navbar-expand ">
@@ -45,14 +45,14 @@ const Header = ({ toggleSidebar }) => {
             </form>
 
             <Dropdown as={ButtonGroup}>
-                <Button variant="secondary"><FontAwesomeIcon icon="user-alt" /> <span className="d-none d-sm-inline-block">quadhay@gmail.com</span></Button>
+                <Button variant="secondary"><FontAwesomeIcon icon="user-alt" /> <span className="d-none d-sm-inline-block">{user.email}</span></Button>
 
                 <Dropdown.Toggle split variant="secondary" id="app-dropdown-split" />
 
                 <Dropdown.Menu>
-                    <NavLink to="/documentation" className="dropdown-item"><FontAwesomeIcon icon="book" /> Documentation</NavLink>
-                    <NavLink to="/settings" className="dropdown-item"><FontAwesomeIcon icon="cog" /> Settings</NavLink>
-                    <NavLink to="/logout" className="dropdown-item"><FontAwesomeIcon icon="power-off" /> Logout</NavLink>
+                    <Dropdown.Item to="/documentation"><FontAwesomeIcon icon="book" /> Documentation</Dropdown.Item>
+                    <Dropdown.Item to="/settings"><FontAwesomeIcon icon="cog" /> Settings</Dropdown.Item>
+                    <Dropdown.Item as="button" onClick={signOut}><FontAwesomeIcon icon="power-off" /> Logout</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
         </nav>  

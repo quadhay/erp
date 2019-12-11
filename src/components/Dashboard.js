@@ -2,14 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import * as Layout from '../containers/layout'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faEnvelope, faKey, faTimes, faBars, faCircle as faCircleSolid, faSearch, faTachometerAlt, faShoppingCart, faChartLine, faGlobe, faBook, faCalendar, faFolder, faBell, faCog, faPowerOff, faGem, faAngleRight, faCheck, faExclamation, faExclamationTriangle, faEllipsisH, faHome, faArrowUp, faExpand, faCompress, faTextHeight, faThumbtack, faUserAlt } from '@fortawesome/free-solid-svg-icons'
 
-import { faCircle } from '@fortawesome/free-regular-svg-icons'
-
-library.add( faEnvelope, faKey, faTimes, faBars, faCircle, faCircleSolid, faSearch, faTachometerAlt, faShoppingCart, faChartLine, faGlobe, faBook, faCalendar, faFolder, faBell, faCog, faPowerOff, faGem, faAngleRight, faCheck, faExclamation, faExclamationTriangle, faEllipsisH, faHome, faArrowUp, faExpand, faCompress, faTextHeight, faThumbtack, faUserAlt )
-
-const AuthenticatedApp = ({ sidebarVisible, pinSidebar, mainHeader, sidebarBg, sidebarBgImg, sidebarMouseEnter, displayRightPane, borderRadius, theme }) => {
+const Dashboard = ({ sidebarVisible, pinSidebar, mainHeader, sidebarBg, sidebarBgImg, sidebarMouseEnter, displayRightPane, borderRadius, theme }) => {
 
     let classes = classNames (
         'page-wrapper', theme, sidebarBgImg,
@@ -34,7 +28,7 @@ const AuthenticatedApp = ({ sidebarVisible, pinSidebar, mainHeader, sidebarBg, s
 
 }
 
-AuthenticatedApp.defaultProps = {
+Dashboard.defaultProps = {
     sidebarVisible: true,
     pinSidebar: false,
     mainHeader: true,
@@ -46,7 +40,7 @@ AuthenticatedApp.defaultProps = {
     theme: 'default-theme',
 }
 
-AuthenticatedApp.propTypes = {
+Dashboard.propTypes = {
     sidebarVisible: PropTypes.bool,
     pinSidebar: PropTypes.bool,
     mainHeader: PropTypes.bool,
@@ -58,4 +52,4 @@ AuthenticatedApp.propTypes = {
     theme: PropTypes.string,
 }
 
-export default AuthenticatedApp
+export default Dashboard

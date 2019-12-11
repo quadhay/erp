@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import AuthenticatedApp from '../components/AuthenticatedApp'
+import Dashboard from '../components/Dashboard'
 
 const mapState = state => ({
     sidebarVisible: state.UI.sidebarVisible,
@@ -13,4 +13,4 @@ const mapState = state => ({
     theme: state.settings.theme
 })
 
-export default connect( mapState )(AuthenticatedApp)
+export default connect( mapState )(Dashboard)

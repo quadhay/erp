@@ -8,9 +8,21 @@ import * as serviceWorker from './serviceWorker'
 import { loadProgressBar } from 'axios-progress-bar'
 import 'axios-progress-bar/dist/nprogress.css'
 import App from './containers/App'
+import axios from 'axios'
+import { app } from './config'
+
 import './sass/app.scss'
 
 loadProgressBar()
+
+axios.defaults.baseURL = app.apiUrl
+axios.interceptors.request.use( (config) => config, (error) => Promise.reject(error) )
+
+axios.interceptors.response.use( (response) => {
+    return response
+}, (error) => {
+	return Promise.reject(error)
+} )
 
 const EVENTS_TO_MODIFY = ['touchstart', 'touchmove', 'touchend', 'touchcancel', 'wheel']
 

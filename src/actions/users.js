@@ -2,11 +2,11 @@ import { userConstants } from '../constants'
 
 const { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT, GETALL_REQUEST, GETALL_SUCCESS, GETALL_FAILURE, DELETE_REQUEST, DELETE_SUCCESS, DELETE_FAILURE } = userConstants
 
-const loginRequest = user => ({ type: LOGIN_REQUEST, user })
+const loginRequest = email => ({ type: LOGIN_REQUEST, email })
 
 const loginSuccess = user => ({ type: LOGIN_SUCCESS, user })
 
-const loginFailure = error => ({ type: LOGIN_FAILURE, error })
+const loginFailure = () => ({ type: LOGIN_FAILURE })
 
 const logout = () => ({ type: LOGOUT })
 

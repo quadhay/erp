@@ -1,0 +1,46 @@
+[
+    {
+        "id": 1,
+        "customer": "3 MAT VENTURES",
+        "location": "Ijebu Ode",
+        "orders": 215,
+        "totalspent": 8500.25,
+        "latestpurchase": "2019-11-21 11:00:00"
+    },
+
+    {
+        "id": 2,
+        "customer": "355 RESTAURANT AND LOUNGE",
+        "location": "Oshodi",
+        "orders": 15,
+        "totalspent": 5000,
+        "latestpurchase": "2019-01-21 12:30:15"
+    },
+
+    {
+        "id": 3,
+        "customer": "A D BASHIRU AND SONS",
+        "location": "Ilupeju",
+        "orders": 25,
+        "totalspent": 10500,
+        "latestpurchase": "2019-11-13 09:05:00"
+    },
+
+    {
+        "id": 4,
+        "customer": "9 TO 7 SUPERMARKET",
+        "location": "Victoria Island",
+        "orders": 315,
+        "totalspent": 185000,
+        "latestpurchase": "2019-11-23 10:09:05"
+    },
+
+    {
+        "id": 5,
+        "customer": "ABIB VENTURES",
+        "location": "Port Harcourt",
+        "orders": 55,
+        "totalspent": 25000,
+        "latestpurchase": "2019-10-11 08:45:10"
+    }
+]

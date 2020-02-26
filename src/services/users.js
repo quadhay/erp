@@ -1,54 +1,40 @@
-import { authHeader } from '../helpers'
-import storeAPI from 'store'
 import axios from 'axios'
 
-const login = ( user, password ) => {
-    const url = 'http://api.inventory.ng/user/login',
-          data = { email: user, password },
-          options = { 'Content-Type': 'application/json' }
+const options = { 'Content-Type': 'application/json' }
 
-    return axios.post( url, data, options )
+const login = input => {
+    return axios.post( '/users/login', input, options )
                 .then ( response => {
-                    storeAPI.set('user', response.data.success)
+                    localStorage.setItem( 'user', JSON.stringify(response.data) )
                     return response
                 }, error => {
                     return Promise.reject(error)
                 } )     
 }
 
-const logout = () => storeAPI.remove('user')
+const logout = () => localStorage.removeItem('user')
 
-const register = ( input ) => {
-    const url = 'http://api.inventory.ng/user/register',
-          data = input, // object
-          options = { 'Content-Type': 'application/json' }
+const register = ( input ) => axios.post( '/users/register', input, options ).then( response => response , error => Promise.reject(error) )
 
-    return axios.post( url, data, options ).then( response => response , error => Promise.reject(error) )
-}
+const getAll = () => axios.get('/users').then( response => response , error => Promise.reject(error) )
 
-const getAll = () => {
-    const url = 'http://api.inventory.ng/users'
+const getById = id => axios.get(`/users/${id}`).then( response => response , error => Promise.reject(error) )
 
-    return axios.get( url, authHeader() ).then( response => response , error => Promise.reject(error) )
-}
+const update = (id, input) => axios.put( `/users/${id}`, input ).then( response => response , error => Promise.reject(error) )
 
-const getById = id => {
-    const url = `http://api.inventory.ng/users/${id}`
+const _delete = id => axios.delete(`/users/${id}`).then( response => response , error => Promise.reject(error) )
 
-    return axios.get( url, authHeader() ).then( response => response , error => Promise.reject(error) )
-}
-
-const update = input => {
-    const url = `http://api.inventory.ng/users`,
-          data = input // object
-
-    return axios.put( url, data, authHeader() ).then( response => response , error => Promise.reject(error) )
-}
-
-const _delete = id => {
-    const url = `http://api.inventory.ng/users/${id}`
-
-    return axios.delete( url, authHeader() ).then( response => response , error => Promise.reject(error) )
+const refresh = () => {
+    return axios.get('/refresh_token')
+                .then ( response => {
+                    let user = JSON.parse(localStorage.getItem('user')),
+                        cloneUser = { ...user, ...{ token: response.data.token } }
+                    localStorage.setItem( 'user', JSON.stringify(cloneUser) )
+                    return Promise.resolve(cloneUser)
+                }, error => {
+                    logout()
+                    return Promise.reject(error)
+                } )     
 }
 
 export const userService = {
@@ -58,24 +44,6 @@ export const userService = {
     getAll,
     getById,
     update,
-    delete: _delete
+    delete: _delete,
+    refresh
 }
-/*
-function handleResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text)
-        if (!response.ok) {
-            if (response.status === 401) {
-                // auto logout if 401 response returned from api
-                logout()
-                window.location.reload(true)
-            }
-
-            const error = (data && data.message) || response.statusText
-            return Promise.reject(error)
-        }
-
-        return data
-    })
-}
-*/

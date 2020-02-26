@@ -6,7 +6,7 @@ import Header from './Header'
 import Notification from './Notification'
 import Message from './Message'
 import Settings from './Settings'
-import Logout from '../../containers/Logout'
+import Logout from './PowerOff'
 import PinFooter from './PinFooter'
 
 export { ShowSidebar, Sidebar, Content, RightPane, Header, Notification, Message, Settings, Logout, PinFooter }

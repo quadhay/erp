@@ -1,0 +1,79 @@
+@import '../sass/variables';
+
+.content {
+    background: #fff;
+    border-radius: 1px;
+    box-shadow: rgba(156, 156, 156, 0.75) 3px 3px 10px 0;
+
+    button, .anchor {
+        &:not(.dropdown-item) {
+            font-weight: 700;
+            color: $secondhand-gray;
+            text-transform: uppercase;
+            transition: all .4s ease-in-out;
+
+            &:hover {
+                text-decoration: none;
+            }
+
+            &.btn {
+                &:hover, &.active {
+                    background: rgba($light-gray, .3);
+                    color: $secondhand-gray;
+                }
+            }
+        }
+    }
+
+    .content-head {
+        overflow: hidden;
+
+        .bulk-actions-toolbar {
+            bottom: -61px;
+            left: 0;
+            z-index: 1;
+
+            &.show {
+                bottom: 0;
+            }
+        }
+    }
+
+    .content-body {
+        .row.group {
+            display: block;
+            padding: 10px;
+
+            &:nth-child(even) {
+                background: whitesmoke;
+            }
+        }
+
+        .answer {
+            background: rgba(#3490dc, .1);
+            color: #434343;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .multi-answers {
+            .row:not(:last-child) {
+                margin-bottom: .5rem;
+            }
+        }
+    }
+
+    .table.vertical-top th, .table.vertical-top td {
+        vertical-align: top;
+    }
+
+    .toobar {
+        background: #eaecf7;
+        color: #3f51b5;
+        transition: all .4s ease-in-out;
+    }
+
+    .sub-heading {
+        font-weight: 700;
+    }
+}

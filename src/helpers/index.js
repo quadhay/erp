@@ -4,6 +4,7 @@ import * as UI_Helpers from './UI'
 import { authHeader } from './auth-header'
 import { csrfToken } from './csrf-token'
 import { _request } from './request'
+import { jwtToken } from './jwt-token'
 
 export {
 	getStorage,
@@ -12,5 +13,6 @@ export {
 	UI_Helpers,
 	authHeader,
 	csrfToken,
-	_request
+	_request,
+	jwtToken
 }

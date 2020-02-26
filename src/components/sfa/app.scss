@@ -1,0 +1,76 @@
+// Variables
+@import './variables';
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito|Open+Sans');
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Reset
+p, label, ul, li, form, h1, h2, h3, h4, h5, h6, dl, dd {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav.navbar {
+    padding: 0 1rem;
+
+    a > img {
+        max-width: 120px;
+    }
+}
+
+textarea {
+	resize: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a.no-style {
+	color: $gray-900;
+}
+
+.text-whitesmoke {
+    color: whitesmoke;
+}
+
+.bg-whitesmoke {
+    background: whitesmoke;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.move {
+    cursor: move;
+}
+
+.grab {
+    cursor: grab;
+}
+
+.grabbing {
+    cursor: grabbing;
+}
+
+.wrapper {
+    padding-top: 4.5rem;
+
+    .row:not(:last-child) {
+        //margin-bottom: .5rem;
+    }
+
+    input:focus, button:focus, a:focus {
+        box-shadow: none !important;
+    }
+}
+
+@import './content';
+@import './form';
+@import './report';
+@import './fancy-input'

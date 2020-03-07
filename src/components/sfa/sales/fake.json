@@ -1,0 +1,71 @@
+[
+    {
+        "id": 1,
+        "reference": "O-QMTZ7M",
+        "customer": "3 MAT VENTURES",
+        "location": "Ijebu Ode",
+        "loading": "L-UFIV10",
+        "date": "2019-11-21 11:00:00",
+        "invoice": [
+            { "product": "Rose Carla Facial", "price": 850.25, "quantity": 3 },
+            { "product": "Rose of Africa 120", "price": 500, "quantity": 1 },
+            { "product": "Softwave Facial Tissue 3x8", "price": 350, "quantity": 5 }
+        ]
+    },
+
+    {
+        "id": 2,
+        "reference": "O-RTT57M",
+        "customer": "355 RESTAURANT AND LOUNGE",
+        "location": "Oshodi",
+        "loading": "L-8VIC10",
+        "date": "2019-01-21 12:30:15",
+        "invoice": [
+            { "product": "TENDER BABY WIPES (24 NAPKIN)*48", "price": 690, "quantity": 2 },
+            { "product": "SPECIAL ORDER - HARCEL", "price": 600, "quantity": 6 },
+            { "product": "ROSE JOURNEY FACIAL * 16 - AIR", "price": 770, "quantity": 1 }
+        ]
+    },
+
+    {
+        "id": 3,
+        "reference": "O-TOUZ85",
+        "customer": "A D BASHIRU AND SONS",
+        "location": "Ilupeju",
+        "loading": "L-UEIV07",
+        "date": "2019-11-13 09:05:00",
+        "invoice": [
+            { "product": "JOYCE PLUS TLT 1X6X8", "price": 850, "quantity": 4 },
+            { "product": "Finetex Small TLT 1X6X8", "price": 950, "quantity": 2 },
+            { "product": "ROSE PLUS-6X8 (R)", "price": 900, "quantity": 2 }
+        ]
+    },
+
+    {
+        "id": 4,
+        "reference": "O-QMMY78",
+        "customer": "9 TO 7 SUPERMARKET",
+        "location": "Victoria Island",
+        "loading": "L-VYIV10",
+        "date": "2019-11-23 10:09:05",
+        "invoice": [
+            { "product": "Rose Carla Facial", "price": 850.25, "quantity": 5 },
+            { "product": "Betti Plus TLT 1x6x8", "price": 700, "quantity": 8 },
+            { "product": "Rose Plus Unwrapped", "price": 600, "quantity": 3 }
+        ]
+    },
+
+    {
+        "id": 5,
+        "reference": "O-Z7MWER",
+        "customer": "ABIB VENTURES",
+        "location": "Port Harcourt",
+        "loading": "L-FIVI10",
+        "date": "2019-10-11 08:45:10",
+        "invoice": [
+            { "product": "Rose Belle TLT 2X24", "price": 800, "quantity": 12 },
+            { "product": "Rose Carla TWL 1x110sheetsx12", "price": 670, "quantity": 11 },
+            { "product": "Rose Carla TLT 1X6X8", "price": 700, "quantity": 5 }
+        ]
+    }
+]

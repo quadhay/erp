@@ -1,0 +1,29 @@
+.table {
+    &.table-md {
+        th, td {
+            padding: 0.5rem;
+        }
+    }
+
+    &.edge-pad {
+        th:first-child, td:first-child {
+            padding-left: 1rem;
+        }
+
+        th:last-child, td:last-child {
+            padding-right: 1rem;
+        }
+    }
+}
+
+.position-top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.position-bottom-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

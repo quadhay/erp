@@ -12,7 +12,7 @@ import { _object, csv } from '../../helpers'
 const Customers = ({ match, location, history, response, update }) => {
     const { loaded, data } = response
     const search = location.search ? queryString.parse(location.search) : {
-        filter: JSON.stringify({}), sort: 'customer', order: 'asc', page: 1, perPage: 10
+        filter: JSON.stringify({}), sort: 'date', order: 'asc', page: 1, perPage: 10
     }
 
     const [ selected, setSelected ] = useState([])
@@ -69,15 +69,17 @@ const Customers = ({ match, location, history, response, update }) => {
 
     const pushSearch = obj => history.push(`${path}?${queryString.stringify({ ...search, ...obj })}`)
 
+    const openOrder = id => history.push(`${path}/${id}`)
+
     const csvData = data => {
         let csv = []
         for (let res of data) {
             csv.push({
-                Customer: res.name,
-                Location: res.city,
-                Orders: res.order,
-                "Total Spent": res.totalspent.toFixed(2),
-                "Last Seen": res.lastseen
+                Date: res.date,
+                Reference: res.reference,
+                Customer: res.customer,
+                "No. Items": res.orderCount,
+                Total: res.amount
             })
         }
         return csv
@@ -99,9 +101,9 @@ const Customers = ({ match, location, history, response, update }) => {
 
             // filter data
             const filtered = data
-                .filter( row => filter.city ? row.city === filter.city : true )
-                .filter( row => filter.order ? row.order === filter.order : true )
-                .filter( row => filter.lastseen ? row.lastseen === filter.lastseen : true )
+                .filter( row => filter.amount ? row.amount === filter.amount : true )
+                .filter( row => filter.orderCount ? row.orderCount === filter.orderCount : true )
+                .filter( row => filter.customer ? row.customer === filter.customer : true )
 
             const orderData = orderBy(filtered, [sort], [order])
 
@@ -154,7 +156,7 @@ const Customers = ({ match, location, history, response, update }) => {
                         </div>
 
                         <div className="_action">
-                            <Link to={`${match.path}/create`} className="btn btn-sm anchor mr-2"><FontAwesomeIcon icon="plus" /> Create</Link>
+                            <Link to={`${match.path}/new`} className="btn btn-sm anchor mr-2"><FontAwesomeIcon icon="plus" /> New</Link>
                             <FilterList list={[ 'payment_method', 'account', 'currency']} />
                             <button className="btn btn-sm" onClick={ () => csv(csvData(filtered), 'Cash Flow') }><FontAwesomeIcon icon="file-export" /> EXPORT</button>
                         </div>
@@ -165,29 +167,27 @@ const Customers = ({ match, location, history, response, update }) => {
                             <thead>
                                 <tr>
                                     <th>
-                                        <input type="checkbox" className="fancy-input round" value="all" onChange={checkHandler} />
+                                        <input type="checkbox" className="fancy-input" value="all" onChange={checkHandler} />
                                     </th>
-                                    <th><span className="pointer" onClick={() => sortHandler('name')}>Customer {arrow('name')}</span></th>
-                                    <th><span className="pointer" onClick={() => sortHandler('city')}>Location {arrow('city')}</span></th>
-                                    <th><span className="pointer" onClick={() => sortHandler('order')}>Orders {arrow('order')}</span></th>
-                                    <th><span className="pointer" onClick={() => sortHandler('totalspent')}>Total Spent {arrow('totalspent')}</span></th>
-                                    <th><span className="pointer" onClick={() => sortHandler('lastseen')}>Last Seen {arrow('lastseen')}</span></th>
+                                    <th><span className="pointer" onClick={() => sortHandler('date')}>Date {arrow('date')}</span></th>
+                                    <th><span className="pointer" onClick={() => sortHandler('reference')}>Reference {arrow('reference')}</span></th>
+                                    <th><span className="pointer" onClick={() => sortHandler('customer')}>Customer {arrow('customer')}</span></th>
+                                    <th className="text-right"><span className="pointer" onClick={() => sortHandler('orderCount')}>No. Items {arrow('orderCount')}</span></th>
+                                    <th className="text-right"><span className="pointer" onClick={() => sortHandler('amount')}>Total {arrow('amount')}</span></th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                { current.map( ({ id, name, city, order, totalspent, lastseen }) => (
-                                    <tr key={id}>
+                                { current.map( ({ id, date, reference, customer, orderCount, amount }) => (
+                                    <tr key={id} className="pointer bg-hover" onClick={() => openOrder(id)}>
                                         <td>
-                                            <input type="checkbox" className="fancy-input round" value={id} onChange={checkHandler} />
+                                            <input type="checkbox" className="fancy-input" value={id} onChange={checkHandler} />
                                         </td>
-                                        <td>
-                                            <Link to={`${match.url}/${id}`}>{name}</Link>
-                                        </td>
-                                        <td>{city}</td>
-                                        <td>{order}</td>
-                                        <td>{totalspent.toFixed(2)}</td>
-                                        <td>{lastseen}</td>
+                                        <td>{date}</td>
+                                        <td>{reference}</td>
+                                        <td>{customer}</td>
+                                        <td className="text-right">{orderCount}</td>
+                                        <td className="text-right">{amount.toFixed(2)}</td>
                                     </tr>
                                 ) ) }
                             </tbody>

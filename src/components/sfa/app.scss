@@ -44,6 +44,9 @@ a.no-style {
 
 .pointer {
     cursor: pointer;
+    &.bg-hover:hover {
+        background-color: rgba(0, 0, 0, 0.07);
+    }
 }
 
 .move {
@@ -73,4 +76,5 @@ a.no-style {
 @import './content';
 @import './form';
 @import './report';
-@import './fancy-input'
+@import './fancy-input';
+@import './_bootstrap-override';

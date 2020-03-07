@@ -2,29 +2,31 @@ import React, { useEffect, useState } from 'react'
 import { Route, Link, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Service } from './service'
-import Customers from './Customers'
-import Create from './Create'
+import Sales from './Sales'
+import Order from './Order'
 import { alertActions } from '../../actions'
-import './customer.scss'
+import './sales.scss'
+import sample from './fake'
 
-const Customer = ({ match, dispatch }) => {
+const _Sales = ({ match, dispatch }) => {
     const [ data, setData ] = useState({ loaded: false, data: [], error: false })
 
     useEffect(() => {
         Service.getAll()
             .then(
                 response => {
-                    setData({ ...data, ...{loaded: true, data: response.data} })
-                    /*if (typeof(response.data) === 'object') {
-                        const items = response.data.map( item => {
-                            const address = JSON.parse(item.address)
-                            Object.assign(item, address)
+                    if (typeof(response.data) === 'object') {
+                        const items = sample.map( item => {
+                            const total = item.invoice.map( item => item.price * item.quantity )
+                            item.orderCount = item.invoice.length
+                            item.amount = total.reduce((a, b) => a + b, 0)
+
                             return item
                         } )
                         setData({ ...data, ...{loaded: true, data: items} })
                     } else {
                         setData({ ...data, ...{loaded: true} })
-                    }*/
+                    }
                 },
                 error => {
                     let msg
@@ -41,10 +43,10 @@ const Customer = ({ match, dispatch }) => {
 
     return (
         <>
-            <Route exact path={match.path} render={ props => <Customers response={data} update={setData} {...props} /> } />
-            <Route path={`${match.path}/:id`} render={ props => <Create response={data} update={setData} {...props} /> } />
+            <Route exact path={match.path} render={ props => <Sales response={data} update={setData} {...props} /> } />
+            <Route path={`${match.path}/:id`} render={ props => <Order response={data} update={setData} {...props} /> } />
         </>
     )
 }
 
-export default connect()(Customer)
+export default connect()(_Sales)

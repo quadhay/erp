@@ -67,41 +67,37 @@
                 }
 
                 ul {
-                    padding: 5px 0;
-                }
-
-                li {
-                    padding-left: 25px;
-                }
-
-                li.sidebar-dropdown a {
-                    padding-left: 18px;
-                }
-
-                li:not(.sidebar-dropdown) {
-                    font-size: 13px;
-
-                    a {
-                        overflow: hidden;
-                        white-space: nowrap;
-                        text-overflow: ellipsis;
-                        &>svg {
-                            font-weight: 400;
-                            font-style: normal;
-                            display: inline-block;
-                            text-align: center;
-                            text-decoration: none;
-                            -webkit-font-smoothing: antialiased;
-                            -moz-osx-font-smoothing: grayscale;
-                            margin-right: 10px;
-                            font-size: 8px;
-                        }
-
-                        .badge,
-                        .label {
-                            margin-left: auto;
-                        }
+                    li {
+                        padding-left: 25px;
                     }
+    
+                    li.sidebar-dropdown a {
+                        padding-left: 18px;
+                    }
+    
+                    li:not(.sidebar-dropdown) {
+                        a {
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                            &>svg {
+                                font-weight: 400;
+                                font-style: normal;
+                                display: inline-block;
+                                text-align: center;
+                                text-decoration: none;
+                                -webkit-font-smoothing: antialiased;
+                                -moz-osx-font-smoothing: grayscale;
+                                margin-right: 10px;
+                                font-size: 12px;
+                            }
+    
+                            .badge,
+                            .label {
+                                margin-left: auto;
+                            }
+                        }
+                    }                    
                 }
             }
 

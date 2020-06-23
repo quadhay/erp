@@ -1,0 +1,83 @@
+.form-wrapper {
+    background: #fff;
+    max-width: 650px;   
+    border-top: 8px solid $secondhand-gray;
+    border-radius: 1px;
+    box-shadow: rgba(156,156,156,.75) 3px 3px 10px 0;
+
+    &.mt-less {
+        margin-top: -100px;
+    }
+
+    img {
+        transform: skewX(15deg);
+        margin-bottom: 1.5rem;
+    }
+
+    .heading {
+        font-size: 2rem;
+    }
+
+    .text {
+        margin: 1.5rem 0;
+    }
+
+    form {
+        .form-group {
+            position: relative;
+
+            &:not(:last-child) {
+                margin-bottom: 1.5rem;
+            }
+
+            label {
+                font-weight: 700;
+            }
+
+            .required-field {
+                font-size: 1.25rem;
+                line-height: 0;
+            }
+
+            .form-control, .custom-select {
+                border: 0;
+                border-radius: 0;
+                border-bottom: 1px solid $secondhand-gray;
+                padding-left: 0;
+                outline: 0;
+
+                &:focus {
+                    box-shadow: none;
+                }
+                
+            }
+            
+            &:not(.radio) {
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0%;
+                    right: 0;
+                    background: $secondhand-gray;
+                    width: 0;
+                    height: 2px;  
+                    transition: width .5s ease;               
+                }
+                
+                &:focus-within {
+                    &::after {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+        .form-group.radio > div > div:not(:last-child) {
+            margin-right: 50px;
+        }
+
+        .react-datepicker-wrapper {
+            display: initial;
+        }
+    }
+}

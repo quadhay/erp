@@ -54,6 +54,12 @@ const routes = [
         id: 9,
         path: "/settings",
         component: Components.Settings
+    },
+
+    {
+        id: 10,
+        path: "/cashflow",
+        component: Components.CashFlow
     }
 ]
 

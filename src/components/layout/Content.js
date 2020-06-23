@@ -20,7 +20,7 @@ const Content = ({ fontSize, contentBox, hideSidebar }) => {
             <div id="overlay" className="overlay" onClick={hideSidebar}></div>
 
             <div className="container-fluid pt-3" style={{ height: 'inherit' }}>
-                <div style={contentBox ? box : null}>
+                <div className="content-area" style={contentBox ? box : null}>
                     <Switch>
                         { routes.map( (route) => <AppRoute key={route.id} {...route} /> ) }                    
                         <Route component={NotFound} />

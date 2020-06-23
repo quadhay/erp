@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import { schemes, images } from '../../config/theme'
 
 const Schemes = ({ theme, event }) => {
-    const schemeELements = schemes.map( (scheme) => <span key={scheme} data-theme={scheme} className={`theme ${scheme}${theme === scheme ? ' selected' : ''}`} onClick={theme !== scheme ? () => event(scheme) : null} /> )
+    const schemeELements = schemes.map( (scheme) => <span key={scheme} data-theme={scheme} className={`theme ${scheme}${theme === scheme ? ' selected' : ''}`} title={scheme} onClick={theme !== scheme ? () => event(scheme) : null} /> )
 
     return (
         <div className="row">
             <div className="form-group col-md-12">
                 <h3>Themes</h3>
-                <p>Here are more themes that you can use</p>
+                <p className="mb-3">Here are more themes that you can use</p>
                 <div className="schemes">{schemeELements}</div>
             </div>
         </div>       
@@ -22,7 +22,7 @@ const BgImg = ({ image, event }) => {
     return (
         <div className="row">
             <div className="form-group col-md-12">
-                <p>You can also use background image </p>
+                <p className="mb-3">You can also use background image </p>
                 <div className="background-images">{background}</div>
             </div>
         </div>       

@@ -6,6 +6,7 @@ import CloseSidebar from './CloseSidebar'
 import SidebarMenu from '../../containers/layout/Menu'
 import SidebarFooter from './SidebarFooter'
 import { sidebar as list } from '../../config'
+import { app } from '../../config'
 
 const Sidebar = ({ toggleSidebar, hoverEvent }) => {
 
@@ -13,7 +14,7 @@ const Sidebar = ({ toggleSidebar, hoverEvent }) => {
         <nav id="sidebar" className="sidebar-wrapper" onMouseEnter={hoverEvent} onMouseLeave={hoverEvent}>
             <div className="sidebar-content">
                 <div className="sidebar-item sidebar-brand">
-                    <Link to="/">guard inventory</Link>
+                    <Link to="/">{app.name}</Link>
                     <CloseSidebar hide={toggleSidebar} />
                 </div>
                 <Search />

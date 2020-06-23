@@ -9,6 +9,7 @@ import queryString from 'query-string'
 import { Dropdown, ButtonGroup } from 'react-bootstrap'
 import { Select } from '../fragment/form-elements'
 import startCase from 'lodash/startCase'
+import { _object, csv } from '../../helpers'
 
 const Show = ({ match, location, history, dispatch }) => {
     const search = location.search ? queryString.parse(location.search) : {
@@ -18,6 +19,7 @@ const Show = ({ match, location, history, dispatch }) => {
     const [ data, setData ] = useState([])
     const [ loaded, setLoaded ] = useState(false)
     const [ filters, setFilters ] = useState({})
+    //const [ filterValue, setFilterValue ] = useState({})
     const path = location.pathname
 
     useEffect(() => {
@@ -39,80 +41,89 @@ const Show = ({ match, location, history, dispatch }) => {
             )        
     }, [])
 
-    useEffect( () => {
-        let data = JSON.parse(search.filter),
-            filters = {}
+    useEffect( () => updateFilters(JSON.parse(search.filter)), [loaded, search.filter] )
 
-        /*for ( let k of Object.keys(data) ) {
-            filters[k] = filterComponent(k, data[k])
-        }*/
-        
+    const updateFilters = (data = {}, filters = {}) => {
         Object.keys(data).map( k => filters[k] = filterComponent(k, data[k]) )
-
         setFilters(filters)
-    }, [loaded] )
+    }
     
-    const pageHandler = page => history.push(`${path}?${queryString.stringify({ ...search, ...{page} })}`)
+    const pageHandler = page => pushSearch({page})
 
-    const perPageHandler = e => history.push(`${path}?${queryString.stringify({ ...search, ...{perPage: e.currentTarget.value} })}`)
+    const perPageHandler = e => pushSearch({perPage: e.currentTarget.value})
 
     const searchHandler = e => {
         let q = e.target.value
         if (q) console.log(q)
     }
 
-    const filterComponent = (filter, value = '', key = 0) => {
-        switch (filter) {
-            case 'payment_method':
-                key = filter              
-                break;
-
-            case 'account':
-                key = 'bank'              
-                break;
-                
-            case 'currency':
-                key = 'code'              
-                break;
-
-            default:
-                break;
-        }
-
-        return <Select key={filter} name={filter} label={startCase(filter)} value={value} values={[...new Set(data.map(item => item[key]))]} handleChange={filterHandler} />
-    }
+    const filterComponent = (filter, value = '') => <Select key={filter} name={filter} label={startCase(filter)} value={value} values={[...new Set(data.map(item => item[filter]))]} handleChange={filterHandler} />
 
     const addFilter = filter => {
-        setFilters({ ...filters, ...{ [filter]: filterComponent(filter) } })
+        let queryFilters = JSON.parse(search.filter)
+        setFilters({ ...filters, ...{ [filter]: filterComponent(filter, queryFilters[filter]) } })
     }
 
     const removeFilter = filter => {
         delete filters[filter]
         setFilters({ ...filters })
+
+        let query_filter = JSON.parse(search.filter)
+        delete query_filter[filter]
+        
+        pushSearch({ page: 1, filter: JSON.stringify(query_filter) })
     }
 
     const filterHandler = (e, filter) => {
-        let filters = JSON.parse(search.filter),
+        let parse_filter = JSON.parse(search.filter),
             input = e.target.value,
-            nFilter = { ...filters, ...{ [filter]: input } }
+            nFilter = { ...parse_filter, ...{ [filter]: input } }
 
-        history.push(`${path}?${queryString.stringify({ ...search, ...{ filter: JSON.stringify(nFilter) } })}`)
+        pushSearch({ page: 1, filter: JSON.stringify(nFilter) })
     }
 
     const sortHandler = text => {
         const order = (search.sort === text) ? search.order === 'asc' ? 'desc' : 'asc' : 'asc'
-        const query = queryString.stringify({ ...search, ...{ sort: text, page: 1, order } })
+        pushSearch({ sort: text, page: 1, order })
+    }
 
-        history.push(`${path}?${query}`)
+    const pushSearch = obj => history.push(`${path}?${queryString.stringify({ ...search, ...obj })}`)
+
+    const csvData = data => {
+        let csv = []
+        for (let res of data) {
+            csv.push({
+                Date: res.date,
+                "Payment Method": res.payment_method,
+                Account: `${res.account} (${res.currency})`,
+                Amount: res.symbol + res.amount.toFixed(2),
+                Comments: res.comments
+            })
+        }
+        return csv
+    }
+    
+    const navigationInfo = (current, perPage, batchLen, totalLen) => {
+        let i = current - 1,
+            to = current === batchLen ? totalLen : current * perPage
+
+        return `${i * perPage + 1} - ${to} of ${totalLen}`
     }
 
     if ( loaded ) {    
         if ( data.length > 0 ) {
-            const { filter, sort, order } = search
+            const { sort, order } = search
             const perPage = parseInt(search.perPage)
             const page = parseInt(search.page)
+            const filter = _object.clean(JSON.parse(search.filter))
 
-            const orderData = orderBy(data, [sort], [order])
+            // filter data
+            const filtered = data
+                .filter( row => filter.payment_method ? row.payment_method === filter.payment_method : true )
+                .filter( row => filter.currency ? row.currency === filter.currency : true )
+                .filter( row => filter.account ? row.account === filter.account : true )
+
+            const orderData = orderBy(filtered, [sort], [order])
 
             let chunkData = chunk(orderData, perPage),
                 current = chunkData[page-1] ? chunkData[page-1] : []
@@ -124,7 +135,21 @@ const Show = ({ match, location, history, dispatch }) => {
                 return null
             }
 
-            const filterList = [ 'payment_method', 'account', 'currency']
+            const FilterList = ({list = []}) => {
+                const added = list.every(filter => filter in filters)
+
+                return added ? null : (
+                    <Dropdown as={ButtonGroup}>
+                        <Dropdown.Toggle as="a" id="filter-dropdown" bsPrefix="btn btn-sm mr-2">
+                            <FontAwesomeIcon icon="filter" /> ADD FILTER
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            { list.map( (filter, i) => filter in filters ? null : <Dropdown.Item as="button" key={i} onClick={ () => addFilter(filter) }>{startCase(filter)}</Dropdown.Item> ) }
+                        </Dropdown.Menu>
+                    </Dropdown>
+                )
+            }
             
             return (
                 <>
@@ -144,23 +169,13 @@ const Show = ({ match, location, history, dispatch }) => {
 
                         <div className="_action">
                             <Link to={`${match.path}/add`} className="btn btn-sm mr-2"><FontAwesomeIcon icon="plus" /> Add Cash Flow</Link>
-                            
-                            <Dropdown as={ButtonGroup}>
-                                <Dropdown.Toggle as="a" id="filter-dropdown" bsPrefix="btn btn-sm mr-2">
-                                    <FontAwesomeIcon icon="filter" /> ADD FILTER
-                                </Dropdown.Toggle>
-
-                                <Dropdown.Menu>
-                                    { filterList.map( (filter, i) => filter in filters ? null : <Dropdown.Item as="button" key={i} onClick={ () => addFilter(filter) }>{startCase(filter)}</Dropdown.Item> ) }
-                                </Dropdown.Menu>
-                            </Dropdown> 
-
-                            <button className="btn btn-sm"><FontAwesomeIcon icon="file-export" /> EXPORT</button>                               
+                            <FilterList list={[ 'payment_method', 'account', 'currency']} /> 
+                            <button className="btn btn-sm" onClick={ () => csv(csvData(filtered), 'Cash Flow') }><FontAwesomeIcon icon="file-export" /> EXPORT</button>                               
                         </div>
                     </div>
 
                     <div className="content-body">
-                        <table className="table">
+                        <table className="table table-sm">
                             <thead>
                                 <tr>
                                     <th><span className="pointer" onClick={() => sortHandler('id')}>Id {arrow('id')}</span></th>
@@ -174,12 +189,12 @@ const Show = ({ match, location, history, dispatch }) => {
                             </thead>
 
                             <tbody>
-                                { current.map( ({ id, amount, comments, date, symbol, bank, payment_method }) => (
+                                { current.map( ({ id, amount, comments, date, symbol, account, payment_method }) => (
                                     <tr key={id} className={ amount < 0 ? 'debit' : 'credit' }>
                                         <td>{id}</td>
                                         <td>{date}</td>
                                         <td>{payment_method}</td>
-                                        <td>{bank}</td>
+                                        <td>{account}</td>
                                         <td>{symbol}{amount.toFixed(2)}</td>
                                         <td>{truncate(comments, {length: 50, separator: /,? +/})}</td>
                                         <td>
@@ -193,16 +208,22 @@ const Show = ({ match, location, history, dispatch }) => {
                         </table>
                     </div> 
 
-                    <div className="content-foot d-flex justify-content-end">
+                    <div className="content-foot d-flex justify-content-between">
+                        <div className="account-link">      
+                            <Link to={`${match.path}/accounts`} className="btn btn-sm mr-2"><FontAwesomeIcon icon="coins" /> Account</Link>
+                        </div>
+
                         <div className="_action">
                             <label>Rows per page:</label>
 
-                            <select className="border-0 pl-1 mr-3 font-weight-bold" value={perPage} onChange={perPageHandler}>
+                            <select className="border-0 mr-4 pl-1 font-weight-bold" value={perPage} onChange={perPageHandler}>
                                 <option value="5">5</option>
                                 <option value="10">10</option>
                                 <option value="25">25</option>
                                 <option value="50">50</option>
                             </select>
+                            
+                            { chunkData.length > 1 ? <span className="mr-4">{navigationInfo(page, perPage, chunkData.length, filtered.length)}</span> : null }
 
                             <span className="navigation">
                                 <button className="btn" disabled={page === 1} onClick={() => pageHandler(page - 1)}><FontAwesomeIcon icon="chevron-left" /></button>

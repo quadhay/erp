@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/erp/static/css/main.a306d4e2.chunk.css",
-    "main.js": "/erp/static/js/main.7349b23a.chunk.js",
-    "main.js.map": "/erp/static/js/main.7349b23a.chunk.js.map",
+    "main.js": "/erp/static/js/main.606367f4.chunk.js",
+    "main.js.map": "/erp/static/js/main.606367f4.chunk.js.map",
     "runtime-main.js": "/erp/static/js/runtime-main.97ab68b7.js",
     "runtime-main.js.map": "/erp/static/js/runtime-main.97ab68b7.js.map",
     "static/css/2.79922f4b.chunk.css": "/erp/static/css/2.79922f4b.chunk.css",
@@ -15,7 +15,7 @@
     "static/js/4.6e190c61.chunk.js": "/erp/static/js/4.6e190c61.chunk.js",
     "static/js/4.6e190c61.chunk.js.map": "/erp/static/js/4.6e190c61.chunk.js.map",
     "index.html": "/erp/index.html",
-    "precache-manifest.6679219c759039536525156c8cdb0cc1.js": "/erp/precache-manifest.6679219c759039536525156c8cdb0cc1.js",
+    "precache-manifest.9bcb56dfef29a9ff4d2ffeb2c066b4c7.js": "/erp/precache-manifest.9bcb56dfef29a9ff4d2ffeb2c066b4c7.js",
     "service-worker.js": "/erp/service-worker.js",
     "static/css/2.79922f4b.chunk.css.map": "/erp/static/css/2.79922f4b.chunk.css.map",
     "static/css/3.3a4bbacc.chunk.css.map": "/erp/static/css/3.3a4bbacc.chunk.css.map",
@@ -29,6 +29,6 @@
     "static/css/2.79922f4b.chunk.css",
     "static/js/2.45b5ee46.chunk.js",
     "static/css/main.a306d4e2.chunk.css",
-    "static/js/main.7349b23a.chunk.js"
+    "static/js/main.606367f4.chunk.js"
   ]
 }

@@ -10,6 +10,61 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// Reset
+p, label, ul, li, form, dl, dd {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+textarea {
+	resize: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Nunito', sans-serif;
+}
+
+.nunito {
+    font-family: 'Nunito', sans-serif;
+}
+
+a.no-style {
+	color: $gray-900;
+}
+
+.text-whitesmoke {
+    color: whitesmoke;
+}
+
+.bg-whitesmoke {
+    background: whitesmoke;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.move {
+    cursor: move;
+}
+
+.grab {
+    cursor: grab;
+}
+
+.grabbing {
+    cursor: grabbing;
+}
+
 a:hover {
     text-decoration: none;
 }
+
+input:focus, button:focus, a:focus {
+    box-shadow: none !important;
+}
+
+@import './form';
+@import './fancy-input';
+@import './content-area';

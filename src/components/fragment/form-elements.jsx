@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 
 export const Input = ({ name, type, label, placeholder, value, required, handleChange }) => {
     return (
-        <>
+        <div className="form-group">
             <label htmlFor={name}>{label}</label>
             <input type={type} name={name} className="form-control" autoComplete="off" placeholder={placeholder} id={name} value={value} onChange={handleChange} required={required} />
-        </>
+        </div>        
     )
-}
+} 
 
 Input.defaultProps = { value: '', placeholder: '', required: false }
 Input.propTypes = {
@@ -23,12 +23,12 @@ Input.propTypes = {
 
 export const TextArea = ({ name, label, value, placeholder, required, handleChange }) => {
     return (
-        <>
+        <div className="form-group">
             <label htmlFor={name}>{label}</label>
             <textarea name={name} className="form-control" rows="2" placeholder={placeholder} id={name} value={value} onChange={handleChange} required={required}></textarea>
-        </>
+        </div>       
     )
-}
+} 
 
 TextArea.defaultProps = { value: '', placeholder: '', required: false }
 TextArea.propTypes = {
@@ -42,15 +42,15 @@ TextArea.propTypes = {
 
 export const Dropdown = ({ name, label, required, value, options, handleChange }) => {
     return (
-        <>
+        <div className="form-group">
             <label>{label}</label>
             <select name={name} className="custom-select" id={name} value={value} onChange={handleChange} required={required}>
                 { ! value ? <option value="">Choose</option> : null }
                 { options.map( ({id, name}) => <option key={id} value={id}>{name}</option> ) }
             </select>
-        </>
+        </div>      
     )
-}
+} 
 
 Dropdown.defaultProps = { value: '', options: [], required: false }
 Dropdown.propTypes = {
@@ -64,7 +64,7 @@ Dropdown.propTypes = {
 
 export const Radio = ({ name, type, label, values, required, value, handleChange }) => {
     return (
-        <>
+        <div className="form-group radio">
             <label>{label}</label>
 
             <div className="d-flex mt-2">
@@ -75,9 +75,9 @@ export const Radio = ({ name, type, label, values, required, value, handleChange
                     </div>
                 ) ) }
             </div>
-        </>     
+        </div>     
     )
-}
+} 
 
 Radio.defaultProps = { required: false }
 Radio.propTypes = {
@@ -108,7 +108,7 @@ export const Field = ({ field, value = '', handleChange }) => {
             break
 
         case "radio":
-            res = <Radio value={value} {...field} />
+            res = <Radio value={value} {...field} /> 
             break
 
         default:
@@ -116,7 +116,7 @@ export const Field = ({ field, value = '', handleChange }) => {
     }
 
     return res
-}
+} 
 
 Field.defaultProps = { handleChange: () => null }
 
@@ -131,7 +131,7 @@ export const DataList = ({ name, values, handleChange }) => (
         <datalist id={name}>
             { values.map( value => <option key={value} value={value}>{value}</option> ) }
         </datalist>
-    </>
+    </>     
 )
 
 DataList.propTypes = {
@@ -144,7 +144,7 @@ export const Select = ({ name, label, value, values, handleChange }) => (
     <select name={name} className="custom-select custom-select-sm" id={name} value={value} onChange={e => handleChange(e, name)}>
         <option value="">{label}</option>
         { values.map( value => <option key={value} value={value}>{value}</option> ) }
-    </select>
+    </select>      
 )
 
 Select.defaultProps = { value: '' }

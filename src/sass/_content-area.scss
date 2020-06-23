@@ -1,0 +1,53 @@
+.content-area {
+    a, button {
+        &:not(.dropdown-item) {
+            font-weight: 700;
+            color: $secondhand-gray;
+            text-transform: uppercase;
+            transition: all .4s ease-in-out;
+    
+            &:hover {
+                text-decoration: none;
+            }
+    
+            &.btn {
+                &:hover, &.active {
+                    background: rgba($light-gray, .3);
+                    color: $secondhand-gray;
+                }
+            }                
+        }
+    }
+            
+    .content-body {
+        .row.group {
+            display: block;
+            padding: 10px;
+
+            &:nth-child(even) {
+                background: whitesmoke;
+            }                
+        }
+
+        .answer {
+            background: rgba(#3490dc, .1);
+            color: #434343;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .multi-answers {
+            .row:not(:last-child) {
+                margin-bottom: .5rem;
+            }
+        }
+    }
+
+    .table td {
+        vertical-align: middle;
+    }
+    
+    tr.debit > td {
+        background-color: rgba(252, 0, 0, 0.05);
+    }    
+}

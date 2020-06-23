@@ -1,9 +1,9 @@
 import { jwtToken } from '../helpers/jwt-token'
 
 const app = {
-    apiUrl: 'http://api.inventory.ng',
+    apiUrl: 'https://ladyofrosary.ng/backend/api',
     jwt: jwtToken(),
-    name: 'Guard Invenotory',
+    name: 'Guard Technologies',
 }
 
 export default app

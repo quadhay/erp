@@ -3,11 +3,13 @@ import * as Purchase from './purchases'
 import * as Sales from './sales'
 import Stock from './stock'
 import Settings from '../containers/AppSettings'
+import CashFlow from './cashflow'
 
 export default {
     DashBoard,
     Purchase,
     Sales,
     Stock,
-    Settings
+    Settings,
+    CashFlow
 }

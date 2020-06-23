@@ -6,4 +6,5 @@
     width: 35px;
     transition-delay: $duration;
     transition: left .5s ease;
+    z-index: 10;
 }

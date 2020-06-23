@@ -17,7 +17,7 @@ $bg-color) {
 
     .main-header {
 
-        background-color: #343a40;
+        background-color: $sidebar-bg-color;
 
         li, span, i, svg, a, input, button {
             color: $primary-color;

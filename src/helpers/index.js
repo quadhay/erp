@@ -8,6 +8,7 @@ import { jwtToken } from './jwt-token'
 import { csv } from './csv'
 import formChanges from './form-change-detector'
 import { _object } from './object'
+import dateFormatter from './_date'
 
 export {
 	getStorage,
@@ -20,5 +21,6 @@ export {
 	jwtToken,
 	csv,
 	formChanges,
-	_object
+	_object,
+	dateFormatter,
 }

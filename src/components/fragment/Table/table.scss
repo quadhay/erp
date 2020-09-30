@@ -1,0 +1,52 @@
+.dersure-table {
+    .card-columns {
+        @media only screen and (min-width: 576px) {
+            column-count: 2;
+        }
+
+        @media only screen and (min-width: 992px) {
+            column-count: 3;
+        }
+
+        @media only screen and (min-width: 1200px) {
+            column-count: 4;
+        }
+    }
+    
+    .stacked ul li {
+        &:not(:last-child) {
+            margin-bottom: .5rem;
+        }
+
+        label {
+            font-style: italic;
+        }
+    }
+
+    .table td {
+        border-color: #f8f9fa !important;
+    }
+
+    &.shadow-box {
+        .table {
+            border-bottom: 1px solid #dee2e6;
+        }
+    }
+
+    .check-notice {
+        height: 0;
+        overflow-y: hidden;
+        z-index: 1;
+
+        &.show {
+            height: 61px;
+        }
+    }
+
+    .filter-toolbar {
+        min-height: 60px;
+        @media only screen and (max-width: 768px) {
+            min-height: 100px;
+        }        
+    }  
+}

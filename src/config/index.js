@@ -1,9 +1,9 @@
 import app from './app'
-import { sidebar } from './menu'
+import { menu_items } from './menu'
 import routes from './routes'
 
 export {
 	app,
-	sidebar,
+	menu_items,
 	routes
 }

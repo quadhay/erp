@@ -5,8 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Nav from './Nav'
 import classNames from 'classnames'
 
-const NavItem = ({ id, path, icon, label, badge, children, hasSubMenu, subMenuVisible, ...props }) => {
-
+const NavItem = ({ id, path, icon, label, badge, children, subMenuVisible, isChild, ...props }) => {
     if ( props.header ) {
         return (
             <li className="header-menu">
@@ -14,49 +13,35 @@ const NavItem = ({ id, path, icon, label, badge, children, hasSubMenu, subMenuVi
             </li>
         )
     } else {
-        const iconEl = props.isChild && !hasSubMenu ? <FontAwesomeIcon icon={icon} /> : <i><FontAwesomeIcon icon={icon} /></i>,
-              labelEl = props.isChild && !hasSubMenu ? label : <span className="menu-text">{label}</span>,
-              badgeEl = badge ? <span className={"badge badge-pill " + badge.bgColor}>{badge.text}</span> : null
-
-        if ( hasSubMenu ) {
+        const iconEl = isChild ? <FontAwesomeIcon icon={icon} /> : <i><FontAwesomeIcon icon={icon} /></i>
+        const labelEl = isChild ? label : <span className="menu-text">{label}</span>
+        const badgeEl = badge ? <span className={`badge badge-pill badge-${badge.bgColor}`}>{badge.text}</span> : null
+              
+        if ( children ) {
             children.map( child => child.isChild = true )
-            
+
             return (
                 <li className={classNames('sidebar-dropdown', { expand: subMenuVisible })}>
-                    <Link to={path} onClick={ event => props.toggleSubMenu(id, props.parentID, event) }>    
+                    <Link to={path} onClick={ e => props.toggleSubMenu(id, e) }>  
                         {iconEl}
                         {labelEl}
                         {badgeEl}
-                        <FontAwesomeIcon icon="angle-right" />
+                        <FontAwesomeIcon icon="angle-right" className="toggler" />
                     </Link>
 
                     <div className={"sidebar-submenu " + (subMenuVisible ? 'expanded' : 'collapsed')}>
-                        <ul>
-                            <Nav
-                                data={children}
-                                parentID={id}
-                                activateMe={props.activateMe}
-                                activeItem={props.activeItem}
-                                toggleSubMenu={props.toggleSubMenu}
-                                expandedItem={props.expandedItem}
-                                expandedItemParent={props.expandedItemParent}
-                                location={props.location}
-                            />
-                        </ul>
+                        <Nav data={children} />
                     </div>
                 </li>
             )                
         } else {
             return (
                 <li>
-                    <NavLink to={path} onClick={() => {
-                        //props.toggleSubMenu(null, props.parentID)
-                        props.activateMe(id)
-                    }}>    
+                    <Link to={path} className={classNames({ active: props.activeItem === id })} onClick={ () => props.activateMe(id) }>    
                         {iconEl}
                         {labelEl}
                         {badgeEl}
-                    </NavLink>
+                    </Link>
                 </li>
             )
         }       
@@ -87,7 +72,6 @@ NavItem.propTypes = {
     activeItem: PropTypes.any,
     activateMe: PropTypes.func.isRequired,
     toggleSubMenu: PropTypes.func,
-    location: PropTypes.object.isRequired,
 }
 
 export default NavItem

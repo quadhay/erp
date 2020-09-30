@@ -1,5 +1,5 @@
 // Fonts
-//@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
 @import 'variables';
@@ -37,12 +37,19 @@ a.no-style {
     color: whitesmoke;
 }
 
+.text-black {
+    color: #000;
+}
+
 .bg-whitesmoke {
     background: whitesmoke;
 }
 
 .pointer {
     cursor: pointer;
+    &.bg-hover:hover {
+        background-color: rgba(0, 0, 0, 0.07);
+    }
 }
 
 .move {
@@ -61,10 +68,29 @@ a:hover {
     text-decoration: none;
 }
 
-input:focus, button:focus, a:focus {
+input:focus, button:focus, a:focus, textarea:focus {
     box-shadow: none !important;
+}
+
+.rating.checked {
+    color: orange;
+}
+
+.flexer {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.flexer2 {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 @import './form';
 @import './fancy-input';
 @import './content-area';
+@import './_bootstrap-override';
+@import './uploader.scss'

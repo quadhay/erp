@@ -9,7 +9,7 @@ const initialState = {
 	rightPanel: false,
 	theme: 'default-theme',
 	sidebarBgImg: 'bg1',
-	sidebarBg: true,
+	sidebarBg: false,
     borderRadius: false	
 }
 

@@ -1,22 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { NavDropdown, Dropdown, Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const Header = ({ toggleSidebar, user, signOut }) => {
+const Header = ({ toggleSidebar, user, signOut, title }) => {
 
     return (
         <nav className="main-header navbar navbar-expand ">
-            <ul className="navbar-nav mr-auto">
-                <li className="nav-item">
-                    <span className="nav-link" data-widget="pushmenu" onClick={toggleSidebar}>
-                        <FontAwesomeIcon icon="bars" />
-                    </span>
-                </li>      
-            </ul>
+            <span data-widget="pushmenu" onClick={toggleSidebar}>
+                <FontAwesomeIcon icon="bars" />
+            </span>
 
-            <form className="form-inline mr-5">
+            <span className="pagetitle h6 text-uppercase my-0 ml-4 mr-auto">{title}</span>
+
+            <form className="form-inline mr-5 d-none d-md-block">
                 <div className="input-group input-group-sm">
                     <input type="search" className="form-control search-content" placeholder="Search..."/>
 
@@ -36,8 +34,12 @@ const Header = ({ toggleSidebar, user, signOut }) => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    <Dropdown.Item to="/documentation"><FontAwesomeIcon icon="book" /> Documentation</Dropdown.Item>
-                    <Dropdown.Item to="/settings"><FontAwesomeIcon icon="cog" /> Settings</Dropdown.Item>
+                    <Link to="/about" className="dropdown-item"><FontAwesomeIcon icon="desktop" /> About</Link>
+
+                    <Link to="/documentation" className="dropdown-item"><FontAwesomeIcon icon="book" /> Documentation</Link>
+
+                    <Link to="/settings" className="dropdown-item"><FontAwesomeIcon icon="cog" /> Settings</Link>
+                    
                     <Dropdown.Item as="button" onClick={signOut}><FontAwesomeIcon icon="power-off" /> Logout</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>

@@ -1,9 +1,9 @@
 import React, { useState, useLayoutEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Field, DateTime, ProcessError } from '../fragment'
+import { Field, DateTime, ProcessError } from '../../fragment'
 import { Service } from './service'
-import { alertActions } from '../../actions'
+import { alertActions } from '../../../actions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Create = ({ dispatch, match, history, response, update }) => {
@@ -81,7 +81,7 @@ const Create = ({ dispatch, match, history, response, update }) => {
         return (
             <div className="row">
                 <div className="col-lg-8 form2">
-                    <form name="customer" className="content pre-disabled" onSubmit={submitHandler}>
+                    <form name="customer" className="shadow-box pre-disabled" onSubmit={submitHandler}>
                         <div className="content-body p-3" style={{maxWidth: '600px'}}>
                             <h4 className="mb-3 sub-heading">Identity</h4>
 
@@ -116,7 +116,7 @@ const Create = ({ dispatch, match, history, response, update }) => {
                             </div>
                         </div>
 
-                        <div className="content-foot d-flex d-flex align-items-center justify-content-between p-3 toobar">
+                        <div className="d-flex d-flex align-items-center justify-content-between p-3 toolbar">
                             <button type="submit" className="btn" id="submit"><FontAwesomeIcon icon="save" /> Save</button>
 
                             { id !== 'create' ? <button type="button" className="btn btn-sm text-danger" onClick={handleDelete}><FontAwesomeIcon icon="trash" /> DELETE</button> : null }
@@ -126,7 +126,7 @@ const Create = ({ dispatch, match, history, response, update }) => {
 
                 { id !== 'create' ?
                     <div className="col-lg-4 d-md-none d-lg-block">
-                        <div className="content p-3">
+                        <div className="shadow-box p-3">
                             <h4 className="mb-3 sub-heading">History</h4>
                             <div className="row">
                                 <div className="col-lg-6">
@@ -152,7 +152,7 @@ const Create = ({ dispatch, match, history, response, update }) => {
                             </div>
                         </div>
 
-                        <div className="content p-3 clearfix">
+                        <div className="shadow-box p-3 clearfix">
                             <i className="float-left mr-3"><FontAwesomeIcon icon="coins" /></i>
                             <div className="float-left">
                                 <label className="font-weight-bold">Order #F6DQM0</label> <br />

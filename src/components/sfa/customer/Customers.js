@@ -5,9 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { chunk, truncate, orderBy } from 'lodash'
 import queryString from 'query-string'
 import { Dropdown, ButtonGroup } from 'react-bootstrap'
-import { Select } from '../fragment/form-elements'
+import { Select } from '../../fragment/form-elements'
 import startCase from 'lodash/startCase'
-import { _object, csv } from '../../helpers'
+import { _object, csv } from '../../../helpers'
 
 const Customers = ({ match, location, history, response, update }) => {
     const { loaded, data } = response
@@ -132,31 +132,33 @@ const Customers = ({ match, location, history, response, update }) => {
             }
 
             return (
-                <div className="content">
-                    <div className="content-head d-flex justify-content-between p-3 position-relative">
-                        <div className={classNames('bulk-actions-toolbar toobar d-flex align-items-center justify-content-between position-absolute px-4 w-100 h-100', {show: selected.length})}>
+                <div className="shadow-box mt-3">
+                    <div className="toolbar-root position-relative">
+                        <div className={classNames('bulk-actions-toolbar toolbar d-flex align-items-center justify-content-between position-absolute px-4 w-100', {show: selected.length})}>
                             <label className="font-weight-bold">{selected.length} item{selected.length > 1 ? 's' : null} selected</label>
 
                             <button className="btn btn-sm text-danger" onClick={ () => console.log('non') }><FontAwesomeIcon icon="trash" /> DELETE</button>
                         </div>
 
-                        <div className="d-flex">
-                            <div className="_search">
-                                <input type="search" className="form-control form-control-sm" placeholder="Search" onKeyUp={searchHandler} />
+                        <div className="d-flex align-items-center justify-content-between px-3 filter-toolbar">
+                            <div className="d-flex">
+                                <div className="_search">
+                                    <input type="search" className="form-control form-control-sm" placeholder="Search" onKeyUp={searchHandler} />
+                                </div>
+
+                                {  Object.keys(filters).map( filter => (
+                                    <div key={filter} className="d-flex align-items-center ml-3">
+                                        <span className="mr-2" onClick={() => removeFilter(filter)}><FontAwesomeIcon icon="times" /></span>
+                                        {filters[filter]}
+                                    </div>
+                                ) ) }
                             </div>
 
-                            {  Object.keys(filters).map( filter => (
-                                <div key={filter} className="d-flex align-items-center ml-3">
-                                    <span className="mr-2" onClick={() => removeFilter(filter)}><FontAwesomeIcon icon="times" /></span>
-                                    {filters[filter]}
-                                </div>
-                            ) ) }
-                        </div>
-
-                        <div className="_action">
-                            <Link to={`${match.path}/create`} className="btn btn-sm anchor mr-2"><FontAwesomeIcon icon="plus" /> Create</Link>
-                            <FilterList list={[ 'payment_method', 'account', 'currency']} />
-                            <button className="btn btn-sm" onClick={ () => csv(csvData(filtered), 'Cash Flow') }><FontAwesomeIcon icon="file-export" /> EXPORT</button>
+                            <div className="_action">
+                                <Link to={`${match.path}/create`} className="btn btn-sm anchor mr-2"><FontAwesomeIcon icon="plus" /> Create</Link>
+                                <FilterList list={[ 'payment_method', 'account', 'currency']} />
+                                <button className="btn btn-sm" onClick={ () => csv(csvData(filtered), 'Cash Flow') }><FontAwesomeIcon icon="file-export" /> EXPORT</button>
+                            </div>
                         </div>
                     </div>
 
@@ -194,7 +196,7 @@ const Customers = ({ match, location, history, response, update }) => {
                         </table>
                     </div>
 
-                    <div className="content-foot d-flex justify-content-end py-2 px-3">
+                    <div className="d-flex justify-content-end pb-2 px-3">
                         <div className="_action">
                             <label>Rows per page:</label>
 

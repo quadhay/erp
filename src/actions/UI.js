@@ -1,11 +1,9 @@
 import { getStorage } from '../helpers'
 import { UI_Constants as UI } from '../constants'
 
-const activateMe = id => ({ type: UI.LINK_CLICK, id })
-
-const toggleSubMenu = ( id, parentID ) => ({ type: UI.TOGGLE_SUBMENU, id, parentID })
-
 const changeFontSize = size => ({ type: UI.CHANGE_FONTSIZE, size })
+
+const setPageTitle = title => ({ type: UI.PAGE_TITLE, title })
 
 const toggleSidebar = () => ({ type: UI.TOGGLE_SIDEBAR })
 
@@ -23,9 +21,8 @@ const SidebarConfig = () => {
 }
 
 export const UI_Actions = {
-    activateMe,
-    toggleSubMenu,
-    changeFontSize,
+	changeFontSize,
+	setPageTitle,
     toggleSidebar,
     togglePinSidebar,
     sidebarHover,

@@ -153,7 +153,7 @@ const Show = ({ match, location, history, dispatch }) => {
             
             return (
                 <>
-                    <div className="content-head d-flex justify-content-between mb-4">
+                    <div className="toolbar-root d-flex justify-content-between mb-4">
                         <div className="d-flex">
                             <div className="_search d-none">
                                 <input type="search" className="form-control form-control-sm" placeholder="Search" onKeyUp={searchHandler} />
@@ -208,7 +208,7 @@ const Show = ({ match, location, history, dispatch }) => {
                         </table>
                     </div> 
 
-                    <div className="content-foot d-flex justify-content-between">
+                    <div className="d-flex justify-content-between">
                         <div className="account-link">      
                             <Link to={`${match.path}/accounts`} className="btn btn-sm mr-2"><FontAwesomeIcon icon="coins" /> Account</Link>
                         </div>

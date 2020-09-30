@@ -1,49 +1,47 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import NavItem from './NavItem' 
+import { withRouter } from 'react-router-dom'
 
-const Nav = ({ data, activeItem, activateMe, expandedItem, expandedItemParent, toggleSubMenu, parentID, location }) => {
+const Nav = ({ data, location }) => {
+    const [ activeItem, setActiveItem ] = useState(null)
+    const [ expandedItem, setExpandedItem ] = useState(null)
+    // setState({ ...state, ...{activeItem: id} })
+    // setState({ ...state, ...{expandedItem: state.expandedItem === id ? null : id} })
+    const activateMe = id => setActiveItem(id)
+    const toggleSubMenu = id => setExpandedItem(expandedItem === id ? null : id)
 
-    return data.length > 0 ? data.map(
-        ({ id, path, icon, label, badge, children, isChild, header }) =>
+    useEffect( () => {
+        for ( let res of data ) {
+            if (res.children) {
+                if ( res.children.find( item => item.path === location.pathname ) ) {
+                    toggleSubMenu(res.id)
+                }
+            } else {
+                if ( res.path === location.pathname ) {
+                    activateMe(res.id)
+                }
+            }
+        }
+    }, [] )
+    
+    if ( data.length < 1 ) return null
+
+    return <ul>
+        {data.map( item =>
             <NavItem
-                key={id}
-                id={id}
-                header={header}
-                label={label}
-                path={path}
-                icon={icon}
-                badge={badge}
-                children={children}
-                isChild={isChild}
-                active={path === location.pathname}
+                key={item.id}
                 activateMe={activateMe}
-                hasSubMenu={children !== undefined}
-                subMenuVisible={expandedItem === id || expandedItemParent === id}
+                subMenuVisible={expandedItem === item.id}
                 expandedItem={expandedItem}
-                expandedItemParent={expandedItemParent}
                 toggleSubMenu={toggleSubMenu}
                 activeItem={activeItem}
-                parentID={parentID}
-                location={location}
-            />
-    ) : null
-
+                {...item}
+            />            
+        )}
+    </ul>
 }
 
-Nav.defaultProps = {
-    parentID: null,
-}
+Nav.propTypes = { data: PropTypes.array.isRequired, location: PropTypes.object.isRequired, }
 
-Nav.propTypes = {
-    data: PropTypes.array.isRequired,
-    parentID: PropTypes.any,
-    activeItem: PropTypes.any,
-    activateMe: PropTypes.func.isRequired,
-    expandedItem: PropTypes.any,
-    expandedItemParent: PropTypes.any,
-    toggleSubMenu: PropTypes.func,
-    location: PropTypes.object.isRequired, 
-}
-
-export default Nav
+export default withRouter(Nav)

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-//import { browserName, deviceDetect, browserVersion } from 'react-device-detect'
 import KeyboardEventHandler from 'react-keyboard-event-handler'
 import ChangeFontSize from './ChangeFontSize'
 

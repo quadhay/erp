@@ -1,23 +1,46 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import classNames from 'classnames'
+import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { cashFlowService } from '../../services'
+import { alertActions } from '../../actions'
 import { chunk, truncate, orderBy } from 'lodash'
 import queryString from 'query-string'
 import { Dropdown, ButtonGroup } from 'react-bootstrap'
 import { Select } from '../fragment/form-elements'
 import startCase from 'lodash/startCase'
 import { _object, csv } from '../../helpers'
+import { MobileAddBtn } from '../fragment'
 
-const Customers = ({ match, location, history, response, update }) => {
-    const { loaded, data } = response
+const Show = ({ match, location, history, dispatch }) => {
     const search = location.search ? queryString.parse(location.search) : {
-        filter: JSON.stringify({}), sort: 'date', order: 'asc', page: 1, perPage: 10
+        filter: JSON.stringify({}), sort: 'id', order: 'asc', page: 1, perPage: 10
     }
-
-    const [ selected, setSelected ] = useState([])
+    
+    const [ data, setData ] = useState([])
+    const [ loaded, setLoaded ] = useState(false)
     const [ filters, setFilters ] = useState({})
+    //const [ filterValue, setFilterValue ] = useState({})
     const path = location.pathname
+
+    useEffect(() => {
+        cashFlowService.getAll()
+            .then(
+                response => {
+                    setData(response.data)
+                    setLoaded(true)
+                },
+                error => {
+                    let msg
+                    if ( error.response ) {
+                        msg = error.response.status !== 500 ? error.response.data : 'Oops, something went wrong'
+                    } else {
+                        msg = error.toString()
+                    }
+                    dispatch(alertActions.error(msg))
+                }
+            )        
+    }, [])
 
     useEffect( () => updateFilters(JSON.parse(search.filter)), [loaded, search.filter] )
 
@@ -25,7 +48,7 @@ const Customers = ({ match, location, history, response, update }) => {
         Object.keys(data).map( k => filters[k] = filterComponent(k, data[k]) )
         setFilters(filters)
     }
-
+    
     const pageHandler = page => pushSearch({page})
 
     const perPageHandler = e => pushSearch({perPage: e.currentTarget.value})
@@ -34,8 +57,6 @@ const Customers = ({ match, location, history, response, update }) => {
         let q = e.target.value
         if (q) console.log(q)
     }
-
-    const checkHandler = e => setSelected([1])
 
     const filterComponent = (filter, value = '') => <Select key={filter} name={filter} label={startCase(filter)} value={value} values={[...new Set(data.map(item => item[filter]))]} handleChange={filterHandler} />
 
@@ -50,7 +71,7 @@ const Customers = ({ match, location, history, response, update }) => {
 
         let query_filter = JSON.parse(search.filter)
         delete query_filter[filter]
-
+        
         pushSearch({ page: 1, filter: JSON.stringify(query_filter) })
     }
 
@@ -69,22 +90,20 @@ const Customers = ({ match, location, history, response, update }) => {
 
     const pushSearch = obj => history.push(`${path}?${queryString.stringify({ ...search, ...obj })}`)
 
-    const openOrder = id => history.push(`${path}/${id}`)
-
     const csvData = data => {
         let csv = []
         for (let res of data) {
             csv.push({
                 Date: res.date,
-                Reference: res.reference,
-                Customer: res.customer,
-                "No. Items": res.orderCount,
-                Total: res.amount
+                "Payment Method": res.payment_method,
+                Account: `${res.account} (${res.currency})`,
+                Amount: res.symbol + res.amount.toFixed(2),
+                Comments: res.comments
             })
         }
         return csv
     }
-
+    
     const navigationInfo = (current, perPage, batchLen, totalLen) => {
         let i = current - 1,
             to = current === batchLen ? totalLen : current * perPage
@@ -92,7 +111,7 @@ const Customers = ({ match, location, history, response, update }) => {
         return `${i * perPage + 1} - ${to} of ${totalLen}`
     }
 
-    if ( loaded ) {
+    if ( loaded ) {    
         if ( data.length > 0 ) {
             const { sort, order } = search
             const perPage = parseInt(search.perPage)
@@ -101,9 +120,9 @@ const Customers = ({ match, location, history, response, update }) => {
 
             // filter data
             const filtered = data
-                .filter( row => filter.amount ? row.amount === filter.amount : true )
-                .filter( row => filter.orderCount ? row.orderCount === filter.orderCount : true )
-                .filter( row => filter.customer ? row.customer === filter.customer : true )
+                .filter( row => filter.payment_method ? row.payment_method === filter.payment_method : true )
+                .filter( row => filter.currency ? row.currency === filter.currency : true )
+                .filter( row => filter.account ? row.account === filter.account : true )
 
             const orderData = orderBy(filtered, [sort], [order])
 
@@ -123,7 +142,7 @@ const Customers = ({ match, location, history, response, update }) => {
                 return added ? null : (
                     <Dropdown as={ButtonGroup}>
                         <Dropdown.Toggle as="a" id="filter-dropdown" bsPrefix="btn btn-sm anchor mr-2">
-                            <FontAwesomeIcon icon="filter" /> ADD FILTER
+                            <FontAwesomeIcon icon="filter" /> Add Filter
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
@@ -132,18 +151,12 @@ const Customers = ({ match, location, history, response, update }) => {
                     </Dropdown>
                 )
             }
-
+            
             return (
-                <div className="content">
-                    <div className="content-head d-flex justify-content-between p-3 position-relative">
-                        <div className={classNames('bulk-actions-toolbar toobar d-flex align-items-center justify-content-between position-absolute px-4 w-100 h-100', {show: selected.length})}>
-                            <label className="font-weight-bold">{selected.length} item{selected.length > 1 ? 's' : null} selected</label>
-
-                            <button className="btn btn-sm text-danger" onClick={ () => console.log('non') }><FontAwesomeIcon icon="trash" /> DELETE</button>
-                        </div>
-
+                <>
+                    <div className="toolbar-root d-flex justify-content-between mb-4">
                         <div className="d-flex">
-                            <div className="_search">
+                            <div className="_search d-none">
                                 <input type="search" className="form-control form-control-sm" placeholder="Search" onKeyUp={searchHandler} />
                             </div>
 
@@ -152,49 +165,52 @@ const Customers = ({ match, location, history, response, update }) => {
                                     <span className="mr-2" onClick={() => removeFilter(filter)}><FontAwesomeIcon icon="times" /></span>
                                     {filters[filter]}
                                 </div>
-                            ) ) }
+                            ) ) }                         
                         </div>
 
                         <div className="_action">
-                            <Link to={`${match.path}/new`} className="btn btn-sm anchor mr-2"><FontAwesomeIcon icon="plus" /> New</Link>
-                            <FilterList list={[ 'payment_method', 'account', 'currency']} />
-                            <button className="btn btn-sm" onClick={ () => csv(csvData(filtered), 'Cash Flow') }><FontAwesomeIcon icon="file-export" /> EXPORT</button>
+                            <Link to={`${match.path}/add`} className="btn btn-sm anchor mr-2"><FontAwesomeIcon icon="plus" /> Create</Link>
+                            <FilterList list={[ 'payment_method', 'account', 'currency']} /> 
+                            <button className="btn btn-sm" onClick={ () => csv(csvData(filtered), 'Cash Flow') }><FontAwesomeIcon icon="file-export" /> Export</button>                      
                         </div>
                     </div>
 
                     <div className="content-body">
-                        <table className="table table-md vertical-top edge-pad">
+                        <table className="table table-sm">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <input type="checkbox" className="fancy-input" value="all" onChange={checkHandler} />
-                                    </th>
+                                    <th><span className="pointer" onClick={() => sortHandler('id')}>Id {arrow('id')}</span></th>
                                     <th><span className="pointer" onClick={() => sortHandler('date')}>Date {arrow('date')}</span></th>
-                                    <th><span className="pointer" onClick={() => sortHandler('reference')}>Reference {arrow('reference')}</span></th>
-                                    <th><span className="pointer" onClick={() => sortHandler('customer')}>Customer {arrow('customer')}</span></th>
-                                    <th className="text-right"><span className="pointer" onClick={() => sortHandler('orderCount')}>No. Items {arrow('orderCount')}</span></th>
-                                    <th className="text-right"><span className="pointer" onClick={() => sortHandler('amount')}>Total {arrow('amount')}</span></th>
+                                    <th><span className="pointer" onClick={() => sortHandler('payment_method')}>Payment Method {arrow('payment_method')}</span></th>
+                                    <th><span className="pointer" onClick={() => sortHandler('account')}>Account {arrow('account')}</span></th>
+                                    <th><span className="pointer" onClick={() => sortHandler('amount')}>Amount {arrow('amount')}</span></th>
+                                    <th><span className="pointer" onClick={() => sortHandler('comments')}>Comments {arrow('comments')}</span></th>
+                                    <th></th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                { current.map( ({ id, date, reference, customer, orderCount, amount }) => (
-                                    <tr key={id} className="pointer bg-hover" onClick={() => openOrder(id)}>
-                                        <td>
-                                            <input type="checkbox" className="fancy-input" value={id} onChange={checkHandler} />
-                                        </td>
+                                { current.map( ({ id, amount, comments, date, symbol, account, payment_method }) => (
+                                    <tr key={id} className={ amount < 0 ? 'debit' : 'credit' }>
+                                        <td>{id}</td>
                                         <td>{date}</td>
-                                        <td>{reference}</td>
-                                        <td>{customer}</td>
-                                        <td className="text-right">{orderCount}</td>
-                                        <td className="text-right">{amount.toFixed(2)}</td>
-                                    </tr>
+                                        <td>{payment_method}</td>
+                                        <td>{account}</td>
+                                        <td>{symbol}{amount.toFixed(2)}</td>
+                                        <td>{truncate(comments, {length: 50, separator: /,? +/})}</td>
+                                        <td>
+                                            <Link to={`${match.url}/${id}`} className="btn btn-sm">
+                                                <FontAwesomeIcon icon="link" />
+                                            </Link>
+                                        </td>
+                                    </tr>                                        
                                 ) ) }
                             </tbody>
                         </table>
-                    </div>
+                    </div> 
 
-                    <div className="content-foot d-flex justify-content-end py-2 px-3">
+                    <div className="d-flex justify-content-end">
+                        <MobileAddBtn to={`${match.path}/add`} />
                         <div className="_action">
                             <label>Rows per page:</label>
 
@@ -204,7 +220,7 @@ const Customers = ({ match, location, history, response, update }) => {
                                 <option value="25">25</option>
                                 <option value="50">50</option>
                             </select>
-
+                            
                             { chunkData.length > 1 ? <span className="mr-4">{navigationInfo(page, perPage, chunkData.length, filtered.length)}</span> : null }
 
                             <span className="navigation">
@@ -213,15 +229,15 @@ const Customers = ({ match, location, history, response, update }) => {
                                 <button className="btn" disabled={page === chunkData.length} onClick={() => pageHandler(page + 1)}><FontAwesomeIcon icon="chevron-right" /></button>
                             </span>
                         </div>
-                    </div>
-                </div>
+                    </div>                                      
+                </>                
             )
         } else {
-            return <Link to={`${match.path}/create`} className="btn btn-sm anchor m-5"><FontAwesomeIcon icon="plus" /> Create Customer</Link>
+            return <Link to={`${match.path}/add`} className="btn btn-sm mr-2"><FontAwesomeIcon icon="plus" /> Add Cash Flow</Link>
         }
     }
 
     return null
 }
 
-export default Customers
+export default connect()(Show)

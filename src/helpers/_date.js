@@ -1,12 +1,13 @@
-export default class _date {
-    constructor(param) {
-        this.date = new Date(param)
+export default class dateFormatter {
+    constructor() {
         this.month = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
     }
 
-    _getTime() {
-        let hour = this.date.getHours()
-        return `${this.date.getDate()}/${this.month[this.date.getMonth()]}/${this.date.getFullYear()}, ${hour}:${this.date.getMinutes()}:${this.date.getSeconds()} ${this.period(hour)}`
+    getTime(time) {
+        let date = new Date(time),
+            hour = date.getHours()
+
+        return `${date.getDate()}/${this.month[date.getMonth()]}/${date.getFullYear()}, ${hour}:${date.getMinutes()}:${date.getSeconds()} ${this.period(hour)}`
     }
 
     period(hour = 0){

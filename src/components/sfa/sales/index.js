@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Route, Link, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Service } from './service'
-import Sales from './Sales'
-import Order from './Order'
-import { alertActions } from '../../actions'
+import Show from './Show'
+import AddOrder from './AddOrder'
+import { alertActions } from '../../../actions'
 import './sales.scss'
 import sample from './fake'
 
-const _Sales = ({ match, dispatch }) => {
+const Sales = ({ match, dispatch }) => {
     const [ data, setData ] = useState({ loaded: false, data: [], error: false })
 
     useEffect(() => {
@@ -36,17 +36,17 @@ const _Sales = ({ match, dispatch }) => {
                         msg = error.toString()
                     }
                     setData({ ...data, ...{loaded: true, error: true} })
-                    dispatch(alertActions.error(msg))
+                    dispatch(alertActions.error('Unable to retrieve data'))
                 }
             )
     }, [])
 
     return (
         <>
-            <Route exact path={match.path} render={ props => <Sales response={data} update={setData} {...props} /> } />
-            <Route path={`${match.path}/:id`} render={ props => <Order response={data} update={setData} {...props} /> } />
+            <Route exact path={match.path} render={ props => <Show response={data} update={setData} {...props} /> } />
+            <Route path={`${match.path}/:id`} render={ props => <AddOrder response={data} update={setData} {...props} /> } />
         </>
     )
 }
 
-export default connect()(_Sales)
+export default connect()(Sales)

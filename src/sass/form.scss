@@ -1,6 +1,6 @@
 .form-wrapper {
     background: #fff;
-    max-width: 650px;   
+    max-width: 650px;
     border-top: 8px solid $secondhand-gray;
     border-radius: 1px;
     box-shadow: rgba(156,156,156,.75) 3px 3px 10px 0;
@@ -24,11 +24,17 @@
 
     form {
         .form-group {
-            position: relative;
-
             &:not(:last-child) {
                 margin-bottom: 1.5rem;
-            }
+            }            
+        }
+    }
+}
+
+.form-wrapper, .form2 {
+    form {
+        .form-group {
+            position: relative;
 
             label {
                 font-weight: 700;
@@ -49,9 +55,9 @@
                 &:focus {
                     box-shadow: none;
                 }
-                
+
             }
-            
+
             &:not(.radio) {
                 &::after {
                     content: '';
@@ -60,10 +66,10 @@
                     right: 0;
                     background: $secondhand-gray;
                     width: 0;
-                    height: 2px;  
-                    transition: width .5s ease;               
+                    height: 2px;
+                    transition: width .5s ease;
                 }
-                
+
                 &:focus-within {
                     &::after {
                         width: 100%;

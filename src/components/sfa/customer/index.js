@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Service } from './service'
 import Customers from './Customers'
 import Create from './Create'
-import { alertActions } from '../../actions'
+import { alertActions } from '../../../actions'
 import './customer.scss'
 
 const Customer = ({ match, dispatch }) => {
@@ -34,7 +34,7 @@ const Customer = ({ match, dispatch }) => {
                         msg = error.toString()
                     }
                     setData({ ...data, ...{loaded: true, error: true} })
-                    dispatch(alertActions.error(msg))
+                    dispatch(alertActions.error('Unable to retrieve data'))
                 }
             )
     }, [])

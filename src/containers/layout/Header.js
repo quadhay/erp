@@ -3,11 +3,12 @@ import { UI_Actions, userActions } from '../../actions'
 import { userService } from '../../services'
 import Header from '../../components/layout/Header'
 
-const mapStateToPrps = state => ({
+const mapStateToProps = state => ({
     id: {
         expanded: state.UI.expandedItem,
         active: state.UI.activeItem
     },
+    title: state.UI.pageTitle,
     user: state.auth.user
 })
 
@@ -19,4 +20,4 @@ const mapDispatchToProps = dispatch => ({
     }    
 })
 
-export default connect( mapStateToPrps, mapDispatchToProps )(Header)
+export default connect( mapStateToProps, mapDispatchToProps )(Header)

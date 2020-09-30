@@ -1,7 +1,14 @@
 
-export const sidebar = [
+export const menu_items = [
     {
         id: 1,
+        path: '/',
+        icon: 'money-bill',
+        label: 'Dashboard'
+    },
+
+    {
+        id: 2,
         path: '#',
         icon: 'shopping-cart',
         label: 'Sales',
@@ -30,7 +37,7 @@ export const sidebar = [
     },
     
     {
-        id: 2,
+        id: 3,
         path: '#',
         icon: 'shopping-bag',
         label: 'Purchase',
@@ -59,16 +66,97 @@ export const sidebar = [
     },
     
     {
-        id: 3,
-        path: '/stock',
-        icon: 'store',
-        label: 'Stock'
+        id: 4,
+        path: '#',
+        icon: [ 'fab', 'salesforce' ],
+        label: 'SFA',
+        children: [
+            {
+                id: 1,
+                path: '/sfa/sales',
+                icon: 'shopping-cart',
+                label: 'Sales'
+            },
+        
+            {
+                id: 2,
+                path: '#',
+                icon: 'users',
+                label: 'Customers',
+                children: [
+                    {
+                        id: 1,
+                        path: '/sfa/customers',
+                        icon: 'users',
+                        label: 'Customers'
+                    },
+
+                    {
+                        id: 2,
+                        path: '/sfa/customers/segments',
+                        icon: 'users',
+                        label: 'Segments'
+                    }
+                ]
+            }
+        ]
     },
     
     {
-        id: 4,
+        id: 5,
         path: '/cashflow',
         icon: 'money-bill',
         label: 'Cash Flows'
+    },
+    
+    {
+        id: 6,
+        path: '#',
+        icon: [ 'fab', 'salesforce' ],
+        label: 'Product',
+        children: [
+            {
+                id: 1,
+                path: '/products',
+                icon: 'shopping-cart',
+                label: 'Products'
+            },
+
+            {
+                id: 2,
+                path: '/products/categories',
+                icon: 'users',
+                label: 'Categories'
+            },
+
+            {
+                id: 3,
+                path: '/products/reviews',
+                icon: 'users',
+                label: 'Reviews'
+            }
+        ]
+    },
+
+    {
+        id: 7,
+        path: '#',
+        icon: 'users',
+        label: 'Customers',
+        children: [
+            {
+                id: 1,
+                path: '/customers',
+                icon: 'users',
+                label: 'Customers'
+            },
+
+            {
+                id: 2,
+                path: '/customers/segments',
+                icon: 'users',
+                label: 'Segments'
+            }
+        ]
     }    
 ]

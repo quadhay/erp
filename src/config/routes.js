@@ -60,6 +60,36 @@ const routes = [
         id: 10,
         path: "/cashflow",
         component: Components.CashFlow
+    },
+
+    {
+        id: 11,
+        path: "/sfa",
+        component: Components.SFA
+    },
+
+    {
+        id: 12,
+        path: "/products",
+        component: Components.Products
+    },
+
+    {
+        id: 13,
+        path: "/customers",
+        component: Components.Customers
+    },
+
+    {
+        id: 14,
+        path: "/about",
+        component: Components.Software
+    },
+
+    {
+        id: 100,
+        path: "/prototyping",
+        component: Components.Prototyping
     }
 ]
 

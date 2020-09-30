@@ -1,5 +1,5 @@
 
-export const sidebar = [
+export const menu_items = [
     {
         id: 1,
         header: true,

@@ -1,5 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-const Home = () => <h4>Welcome, Admin!</h4>
+const mapState = state => ({ user: state.auth.user })
 
-export default Home
+const Home = ({ user }) => <h4>Welcome, {user.name}!</h4>
+
+export default connect( mapState )(Home)

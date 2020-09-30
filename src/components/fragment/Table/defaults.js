@@ -1,0 +1,16 @@
+export const options = {
+    create: false,
+    columnOrder: [],
+    download: true,
+    filter: true,
+    page: 1,
+    pagination: true,
+    responsive: 'standard',
+    rowsPerPage: 10,
+    rowsPerPageOptions: [5, 10, 15, 25, 50],
+    search: true,
+    select: false,
+    shadow: false,
+    sort: true,    
+    sortOrder: {},
+}

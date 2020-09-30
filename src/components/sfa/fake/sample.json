@@ -5,7 +5,7 @@
         "location": "Ijebu Ode",
         "orders": 215,
         "totalspent": 8500.25,
-        "latestpurchase": "2019-11-21 11:00:00"
+        "lastseen": "2019-11-21 11:00:00"
     },
 
     {
@@ -14,7 +14,7 @@
         "location": "Oshodi",
         "orders": 15,
         "totalspent": 5000,
-        "latestpurchase": "2019-01-21 12:30:15"
+        "lastseen": "2019-01-21 12:30:15"
     },
 
     {
@@ -23,7 +23,7 @@
         "location": "Ilupeju",
         "orders": 25,
         "totalspent": 10500,
-        "latestpurchase": "2019-11-13 09:05:00"
+        "lastseen": "2019-11-13 09:05:00"
     },
 
     {
@@ -32,7 +32,7 @@
         "location": "Victoria Island",
         "orders": 315,
         "totalspent": 185000,
-        "latestpurchase": "2019-11-23 10:09:05"
+        "lastseen": "2019-11-23 10:09:05"
     },
 
     {
@@ -41,6 +41,6 @@
         "location": "Port Harcourt",
         "orders": 55,
         "totalspent": 25000,
-        "latestpurchase": "2019-10-11 08:45:10"
+        "lastseen": "2019-10-11 08:45:10"
     }
 ]

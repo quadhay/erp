@@ -7,7 +7,7 @@ import store from './store'
 import * as serviceWorker from './serviceWorker'
 import { loadProgressBar } from 'axios-progress-bar'
 import 'axios-progress-bar/dist/nprogress.css'
-import App from './containers/App'
+import App from './components/app'
 import axios from 'axios'
 import { app } from './config'
 

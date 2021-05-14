@@ -10,7 +10,7 @@ export default class ErrorHandler extends Component {
 
 	componentDidCatch(error, info) {
 		this.setState({ errorOccurred: true })
-		logErrorToMyService(error, info)
+		// logErrorToMyService(error, info)
 	}
 
 	render() {

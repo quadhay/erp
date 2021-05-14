@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { settingActions as S, UI_Actions as UI }  from '../actions'
-import AppSettings from '../components/AppSettings'
+import { settingActions as S, UI_Actions as UI }  from '../../actions'
+import Settings from './Settings'
 
 const mapStateToProps = state => ({
 	fontSize: state.settings.fontSize,
@@ -32,4 +32,4 @@ const mapDispatchToProps = dispatch => ({
 	borderRadiusVisibility: () => dispatch(S.borderRadiusVisibility())
 })
 
-export default connect( mapStateToProps, mapDispatchToProps )(AppSettings)
+export default connect( mapStateToProps, mapDispatchToProps )(Settings)

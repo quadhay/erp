@@ -1,4 +1,4 @@
-import Components from '../components/routeComponents'
+import Components from './Components'
 
 const routes = [
     {

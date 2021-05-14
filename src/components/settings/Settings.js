@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import CustomSwitch from '../helpers/customSwitch'
-import { Schemes, BgImg } from './layout/Themes'
+import CustomSwitch from '../../helpers/customSwitch'
+import { Schemes, BgImg } from '../layout/Themes'
 
 const Settings = ({ sidebar, pinSidebar, mainHeader, rightPanel, theme, sidebarBgImg, sidebarBg, borderRadius, setTheme, setSidebarBgImg, sidebarVisibility, borderRadiusVisibility, setPinSidebar, setMainHeader, sidebarBgImgVisibility, rightPanelVisibility }) => {
     

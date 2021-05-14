@@ -65,30 +65,26 @@
                     display: block;
                 }
 
-                ul {
-                    li {
-                        padding-left: 25px;
+                ul li a {
+                    padding-left: 28px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    &>svg {
+                        width: 15px;
+                        font-style: normal;
+                        text-align: center;
+                        text-decoration: none;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        margin-right: 18px;
+                        font-size: 12px;
+                    }
 
-                        a {
-                            overflow: hidden;
-                            white-space: nowrap;
-                            text-overflow: ellipsis;
-                            &>svg {
-                                font-style: normal;
-                                text-align: center;
-                                text-decoration: none;
-                                -webkit-font-smoothing: antialiased;
-                                -moz-osx-font-smoothing: grayscale;
-                                margin-right: 10px;
-                                font-size: 12px;
-                            }
-    
-                            .badge,
-                            .label {
-                                margin-left: auto;
-                            }
-                        }                        
-                    }                    
+                    .badge,
+                    .label {
+                        margin-left: auto;
+                    }
                 }
             }
 

@@ -1,11 +1,20 @@
 import { connect } from 'react-redux'
-import App from '../components/App'
-import { userActions, alertActions } from '../actions'
-import { userService } from '../services'
+import App from './App'
+import { userActions, alertActions } from '../../actions'
+import { userService } from '../../services'
 
 const mapState = state => ({
     auth: state.auth,
-    alert: state.alert
+    alert: state.alert,
+    sidebarVisible: state.UI.sidebarVisible,
+    pinSidebar: state.UI.pinSidebar,
+    sidebarMouseEnter: state.UI.sidebarMouseEnter,
+    mainHeader: state.settings.mainHeader,
+    sidebarBg: state.settings.sidebarBg,
+    sidebarBgImg: state.settings.sidebarBgImg,
+    displayRightPane: state.settings.rightPanel,
+    borderRadius: state.settings.borderRadius,
+    theme: state.settings.theme    
 })
 
 const actions = dispatch => ({

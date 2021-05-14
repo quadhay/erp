@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Redirect, Route, Switch, useLocation } from 'react-router-dom'
-import routes from '../../config/routes'
-import NotFound from '../NotFound'
+import routes from '../routes'
+import { NotFound } from '../error'
 import { withTitle } from '../hoc'
 
 const Content = ({ fontSize, contentBox, hideSidebar, ...props }) => {

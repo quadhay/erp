@@ -8,8 +8,8 @@ import { menu_items } from '../../config'
 import { app } from '../../config'
 import Nav from './Nav'
 
-const Sidebar = ({ toggleSidebar, hoverEvent }) => (
-    <nav id="sidebar" className="sidebar-wrapper" onMouseEnter={hoverEvent} onMouseLeave={hoverEvent}>
+const Sidebar = ({ toggleSidebar, hover }) => (
+    <nav id="sidebar" className="sidebar-wrapper" onMouseEnter={hover} onMouseLeave={hover}>
         <div className="sidebar-content">
             <div className="sidebar-item sidebar-brand">
                 <Link to="/">{app.name}</Link>
@@ -29,7 +29,7 @@ const Sidebar = ({ toggleSidebar, hoverEvent }) => (
 
 Sidebar.propTypes = {
     toggleSidebar: PropTypes.func.isRequired,
-    hoverEvent: PropTypes.func.isRequired,
+    hover: PropTypes.func.isRequired,
 }
 
 export default Sidebar

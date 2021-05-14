@@ -47,7 +47,7 @@ export const structuredData = (columns, data, options, query) => {
      * structuredData data with different options available
      */
     const filter = _object.clean(JSON.parse(query.filter))
-
+console.log(data)
     const filterable = data.map( item => {
         if ( columns.length > item.length ) {
             throw new Error('Unmatch columns/data definitions: Columns definition must not be more that corresponding data definition.')
